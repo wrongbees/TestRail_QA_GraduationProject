@@ -11,7 +11,7 @@ import wrappers.InputField;
 
 public class LoginPage extends BasePage {
 
-    private final static String endpoint = "/index.php?/auth/login";
+    private final static String ENDPOINT = "/index.php?/auth/login";
 
     private final static By LOGIN_PAGE_TITLE = By.className("loginpage-installationname");
     private final static By EMAIL_FIELD = By.id("name");
@@ -24,7 +24,7 @@ public class LoginPage extends BasePage {
 
     @Override
     protected void openPage() {
-        browsersService.getDriver().get(ReadProperties.getInstance().getURL() + endpoint);
+        browsersService.getDriver().get(ReadProperties.getInstance().getURL() + ENDPOINT);
     }
 
     @Override
@@ -52,10 +52,11 @@ public class LoginPage extends BasePage {
         return new Button(browsersService, BUTTON_FIELD);
     }
 
-    public void successfulLogin() {
+    public DashboardPage successfulLogin() {
         inputEmail(ReadProperties.getInstance().getUsername());
         inputPasswordField(ReadProperties.getInstance().getPassword());
         clickButton();
+        return new DashboardPage(browsersService,true);
     }
 
     public LoginPage unsuccessfulLogin(String email, String password) {
