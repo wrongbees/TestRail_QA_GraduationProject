@@ -23,7 +23,6 @@ public final class ReadProperties {
         return instance;
     }
 
-    // Методы получения property
     public String getURL() {
         return properties.getProperty("url");
     }

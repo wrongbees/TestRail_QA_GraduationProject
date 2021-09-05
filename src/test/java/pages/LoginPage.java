@@ -11,14 +11,12 @@ import wrappers.InputField;
 
 public class LoginPage extends BasePage {
 
-
     private final static String endpoint = "/index.php?/auth/login";
 
     private final static By LOGIN_PAGE_TITLE = By.className("loginpage-installationname");
     private final static By EMAIL_FIELD = By.id("name");
     private final static By PASSWORD_FIELD = By.id("password");
     private final static By BUTTON_FIELD = By.id("button_primary");
-
 
     public LoginPage(BrowsersService browsersService, boolean openPageByUrl) {
         super(browsersService, openPageByUrl);
@@ -74,19 +72,16 @@ public class LoginPage extends BasePage {
     private void inputEmail(String email) {
         getNameField()
                 .sendKeys(email);
-
     }
 
     private void inputPasswordField(String password) {
         getPasswordField()
                 .sendKeys(password);
-
     }
 
     private void clickButton() {
         getLoginButton()
                 .click();
-
     }
 }
 
