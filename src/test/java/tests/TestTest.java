@@ -1,6 +1,7 @@
 package tests;
 
 import baseEntities.BaseTest;
+import models.ProjectFactory;
 import models.Project;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -25,12 +26,13 @@ public class TestTest extends BaseTest {
     public void addProjectTest() {
 
         //5. надо определиться, где мы будем билдить наши сущности
-        Project project = Project.builder()
-                .name("1111")
-                .announcement("222222")
-                .show_announcement(true)
-                .suite_mode(2)
-                .build();
+        Project project = ProjectFactory.getProject();
+//        Project project = Project.builder()
+//                .name("1111")
+//                .announcement("222222")
+//                .show_announcement(true)
+//                .suite_mode(2)
+//                .build();
 
         new LoginPage(browsersService, true)
                 .successfulLogin()
