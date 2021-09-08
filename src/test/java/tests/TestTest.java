@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.LoginPage;
+import pages.ProjectsOverviewPage;
 
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
@@ -94,5 +95,19 @@ public class TestTest extends BaseTest {
         WebElement textMessage = browsersService.getWaiters().waitForVisibility(By.className("message-success"));
 
         Assert.assertEquals(textMessage.getText(), "Successfully added the new test case. Add another");
+    }
+
+    @Test
+    public void deleteProjectTest() throws InterruptedException {
+        Project project = Project.builder()
+                .name("Ms. Kristofer Osinski_Project.")
+                .build();
+
+        new LoginPage(browsersService, true)
+                .successfulLogin();
+
+        new ProjectsOverviewPage(browsersService,true).deleteProject(project);
+        Thread.sleep(3000);
+
     }
 }
