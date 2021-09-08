@@ -6,16 +6,15 @@ import core.ReadProperties;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
-import wrappers.Button;
 
-public class TestCasesPage extends BasePage {
+public class SomeTestCasePage extends BasePage {
 
-    private final static String ENDPOINT = "index.php?/suites/view/2";//???
+    private final static String ENDPOINT = "index.php?/cases/view/3";//???
 
-    private final static By TEST_CASES_TITLE = By.cssSelector(".page_title");
-    private final static By ADD_TEST_CASE_BUTTON = By.id("sidebar-cases-add");
+    private final static By TEST_CASES_TITLE = By.className("content-header-id");
+    private final static By TEST_CASES_TITLE_NAME = By.cssSelector(".page_title");
 
-    public TestCasesPage(BrowsersService browsersService, boolean openPageByUrl) {
+    public SomeTestCasePage(BrowsersService browsersService, boolean openPageByUrl) {
         super(browsersService, openPageByUrl);
     }
 
@@ -37,13 +36,7 @@ public class TestCasesPage extends BasePage {
         return browsersService.getWaiters().waitForVisibility(TEST_CASES_TITLE);
     }
 
-    private Button getAddTestCaseButton(){
-        return new Button(browsersService,ADD_TEST_CASE_BUTTON);
-    }
-
-    public AddTestCasePage clickAddTestCaseButton(){
-        getAddTestCaseButton()
-                .click();
-        return new AddTestCasePage(browsersService,false);
+    public WebElement getTestCaseName(){
+        return browsersService.getWaiters().waitForVisibility(TEST_CASES_TITLE_NAME);
     }
 }

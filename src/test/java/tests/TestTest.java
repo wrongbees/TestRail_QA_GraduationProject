@@ -1,7 +1,7 @@
 package tests;
 
 import baseEntities.BaseTest;
-import models.ProjectFactory;
+import models.ModelsFactory;
 import models.Project;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -26,7 +26,7 @@ public class TestTest extends BaseTest {
     public void addProjectTest() {
 
         //5. надо определиться, где мы будем билдить наши сущности
-        Project project = ProjectFactory.getProject();
+        Project project = ModelsFactory.getProject();
 //        Project project = Project.builder()
 //                .name("1111")
 //                .announcement("222222")
