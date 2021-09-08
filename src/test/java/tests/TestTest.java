@@ -7,8 +7,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.AdministrationProjectsPage;
 import pages.LoginPage;
-import pages.ProjectsOverviewPage;
 
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
@@ -73,7 +73,7 @@ public class TestTest extends BaseTest {
         Robot robot = new Robot();
 
         StringSelection stringSelection = new StringSelection(absolutePath);
-        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection,null);
+        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
 
         robot.setAutoDelay(500);
         robot.keyPress(KeyEvent.VK_CONTROL);
@@ -99,17 +99,27 @@ public class TestTest extends BaseTest {
         Assert.assertEquals(textMessage.getText(), "Successfully added the new test case. Add another");
     }
 
+    /*
+    Тест...
+    Добавился проект...
+    Удалился проект...
+    Проверили (по возникновению ошибки), что проекта нет...
+     */
     @Test
-    public void deleteProjectTest() throws InterruptedException {
-        Project project = Project.builder()
-                .name("Ms. Kristofer Osinski_Project.")
-                .build();
+    public void deleteProjectTest() {
+        Project project = ModelsFactory.getProject();
+
+        System.out.println(project.getName());
 
         new LoginPage(browsersService, true)
-                .successfulLogin();
+                .successfulLogin()
+                .clickAddProjectButton()
+                .addProject(project);
 
-        new ProjectsOverviewPage(browsersService,true).deleteProject(project);
-        Thread.sleep(3000);
+        AdministrationProjectsPage adminPage = new AdministrationProjectsPage(browsersService, true)
+                .deleteProject(project);
+
+        Assert.assertThrows(java.lang.NullPointerException.class, () -> adminPage.deleteProject(project));
 
     }
 }

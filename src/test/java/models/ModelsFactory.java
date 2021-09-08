@@ -1,5 +1,6 @@
 package models;
 
+
 import com.github.javafaker.Faker;
 
 import java.util.Random;
@@ -9,17 +10,13 @@ public class ModelsFactory {
     private static Faker faker = new Faker();
 
     public static Project getProject() {
-    /*
-    https://github.com/DiUS/java-faker
-     */
-        Project project = Project.builder()
+
+        return Project.builder()
                 .name(faker.name().fullName() + "_Project.")
                 .announcement(faker.lordOfTheRings().location())
                 .show_announcement(random.nextBoolean())
                 .suite_mode(random.nextInt(3) + 1)
                 .build();
-
-        return project;
     }
 
     public String stringGenerator(int numberOfSymbols) {
