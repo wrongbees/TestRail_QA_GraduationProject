@@ -11,13 +11,19 @@ import java.util.List;
 public class TableRow {
     private BrowsersService browsersService;
     private UIElement uiElement;
-    private List<Cell> tableRowList = new ArrayList<>();
+    private List<Cell> tableCellList = new ArrayList<>();
 
     public TableRow(BrowsersService browsersService, WebElement webElement) {
         this.browsersService = browsersService;
         this.uiElement = new UIElement(browsersService,webElement);
 
-        for (WebElement element : this.uiElement.findElements(By.xpath("//td")))
-        tableRowList.add(new Cell(browsersService, element));
+        for (WebElement element : this.uiElement.findElements(By.xpath("./td")))
+        tableCellList.add(new Cell(browsersService, element));
+
+    }
+
+    protected UIElement getCellByIndex(int index){
+        if (!(index > 0 & index <= 3)) {return null;}            // добавить логгер error
+        return tableCellList.get(index - 1).getUIElement();
     }
 }

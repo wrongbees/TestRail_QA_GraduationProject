@@ -13,7 +13,7 @@ public class ProjectsOverviewPage extends BasePage {
     private static Table table;
     private static final String endpoint = "/index.php?/admin/projects/overview";
 
-    private final static By PROJECTS_PAGE_TITLE = By.className("content-header-title page_title");
+    private final static By PROJECTS_PAGE_TITLE = By.xpath("//*[@class = 'content-header-title page_title']");
     private final static By TABLE = By.xpath("//table[@class = 'grid']");
 
 
@@ -41,8 +41,12 @@ public class ProjectsOverviewPage extends BasePage {
 
     private WebElement getProjectPageTitle(){ return browsersService.getDriver().findElement(PROJECTS_PAGE_TITLE);}
 
-    public void editProject(Project project){}
+    public void editProject(Project project){
 
-    public void deleteProject(Project project){}
+    }
+
+    public void deleteProject(Project project){
+        table.getDeleteCell(project.getName()).click();
+    }
 
     }

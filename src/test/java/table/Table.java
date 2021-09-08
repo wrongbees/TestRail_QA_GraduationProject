@@ -18,8 +18,20 @@ public class Table {
         uiElement = new UIElement(browsersService, webElement);
 
 
-        for( WebElement element: uiElement.findElements(By.xpath("//tr[@class != 'header']")))
-        tableRowList.add(new TableRow(browsersService, element));
+        for (WebElement element : uiElement.findElements(By.xpath("//tr[@class != 'header']")))
+            tableRowList.add(new TableRow(browsersService, element));
 
+    }
+
+    public UIElement getDeleteCell(String projectName) {return getRowByText(projectName).getCellByIndex(3);}
+
+    public UIElement getEditCell(String projectName) {return getRowByText(projectName).getCellByIndex(2);}
+
+    private TableRow getRowByText(String projectName) {
+        for (TableRow row : tableRowList) {
+            if (row.getCellByIndex(1).findElement(By.xpath("./a[1]")).getText().equalsIgnoreCase(projectName))
+                return row;
+        }
+        throw new NullPointerException("Project not found");
     }
 }
