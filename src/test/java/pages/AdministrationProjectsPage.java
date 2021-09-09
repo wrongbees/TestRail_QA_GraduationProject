@@ -50,4 +50,6 @@ public class AdministrationProjectsPage extends BasePage {
 
     }
 
+    public boolean projectIsFound(Project project){return table.presentInTheTable(project.getName());}
+
 }

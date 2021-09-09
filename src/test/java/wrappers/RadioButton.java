@@ -13,7 +13,7 @@ public class RadioButton {
 
   //  private UIElement uiElement;
     private List<UIElement> options = new ArrayList<>();
-  //  private BrowsersService browsersService;
+    private BrowsersService browsersService;
 
     /***
      * RadioButton ui element для улучшения работы
@@ -22,7 +22,7 @@ public class RadioButton {
      *
      */
     public RadioButton(BrowsersService browsersService, By by) {
-     //   this.browsersService = browsersService;
+        this.browsersService = browsersService;
 
         for (WebElement element: browsersService.getDriver().findElements(by)) {
             options.add(new UIElement(browsersService, element));

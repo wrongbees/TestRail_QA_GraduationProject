@@ -53,10 +53,10 @@ public class LoginPage extends BasePage {
     }
 
     public DashboardPage successfulLogin() {
-        inputEmail(ReadProperties.getInstance().getUsername());
-        inputPasswordField(ReadProperties.getInstance().getPassword());
-        clickButton();
-        return new DashboardPage(browsersService,true);
+        inputEmail(ReadProperties.getInstance().getUsername())
+                .inputPasswordField(ReadProperties.getInstance().getPassword())
+                .clickButton();
+        return new DashboardPage(browsersService, true);
     }
 
     public LoginPage unsuccessfulLogin(String email, String password) {
@@ -70,14 +70,16 @@ public class LoginPage extends BasePage {
         return this;
     }
 
-    private void inputEmail(String email) {
+    private LoginPage inputEmail(String email) {
         getNameField()
                 .sendKeys(email);
+        return this;
     }
 
-    private void inputPasswordField(String password) {
+    private LoginPage inputPasswordField(String password) {
         getPasswordField()
                 .sendKeys(password);
+        return this;
     }
 
     private void clickButton() {

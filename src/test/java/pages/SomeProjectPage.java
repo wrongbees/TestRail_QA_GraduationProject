@@ -6,10 +6,11 @@ import core.ReadProperties;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import wrappers.Button;
 
 public class SomeProjectPage extends BasePage {
 
-    private final static String ENDPOINT = "/index.php?/projects/overview/2";
+    private final static String ENDPOINT = "/index.php?/projects/overview/%s";
 
     private final static By SOME_PROJECT_TITLE = By.cssSelector(".page_title");
     private final static By DASHBOARD_TEST_CASE_TITLE = By.id("navigation-suites");
@@ -36,8 +37,8 @@ public class SomeProjectPage extends BasePage {
         return browsersService.getWaiters().waitForVisibility(SOME_PROJECT_TITLE);
     }
 
-    private WebElement getDashboardTestCaseButton(){
-        return browsersService.getWaiters().waitForVisibility(DASHBOARD_TEST_CASE_TITLE);
+    private Button getDashboardTestCaseButton(){
+        return new Button(browsersService,DASHBOARD_TEST_CASE_TITLE);
     }
 
     public TestCasesPage clickDashboardTestCaseButton(){
@@ -45,4 +46,5 @@ public class SomeProjectPage extends BasePage {
                 .click();
         return new TestCasesPage(browsersService,false);
     }
+
 }

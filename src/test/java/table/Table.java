@@ -34,4 +34,15 @@ public class Table {
         }
         throw new NullPointerException("Project not found");
     }
+
+    public boolean presentInTheTable(String projectName) {
+        if (projectName == null){return false;}
+
+        for (TableRow row : tableRowList) {
+            if (row.getCellByIndex(1).findElement(By.xpath("./a[1]")).getText().equalsIgnoreCase(projectName))
+                return true;
+        }
+        // logger.info("Project not found");
+        return false;
+    }
 }

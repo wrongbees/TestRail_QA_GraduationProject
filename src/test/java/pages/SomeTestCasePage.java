@@ -6,6 +6,7 @@ import core.ReadProperties;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import wrappers.Button;
 
 public class SomeTestCasePage extends BasePage {
 
@@ -13,6 +14,7 @@ public class SomeTestCasePage extends BasePage {
 
     private final static By TEST_CASES_TITLE = By.className("content-header-id");
     private final static By TEST_CASES_TITLE_NAME = By.cssSelector(".page_title");
+    private final static By ENTITY_ATTACHMENT_LIST = By.id("entityAttachmentListEmptyIcon");
 
     public SomeTestCasePage(BrowsersService browsersService, boolean openPageByUrl) {
         super(browsersService, openPageByUrl);
@@ -32,11 +34,18 @@ public class SomeTestCasePage extends BasePage {
         }
     }
 
+    private Button getEntityAttachmentField(){ return new Button(browsersService,ENTITY_ATTACHMENT_LIST);}
+
     private WebElement getTestCasesInstallationName(){
+
         return browsersService.getWaiters().waitForVisibility(TEST_CASES_TITLE);
     }
 
     public WebElement getTestCaseName(){
         return browsersService.getWaiters().waitForVisibility(TEST_CASES_TITLE_NAME);
+    }
+
+    public void clickEntityAttachmentFieldButton(){
+        getEntityAttachmentField().click();
     }
 }

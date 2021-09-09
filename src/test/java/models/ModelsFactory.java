@@ -15,11 +15,27 @@ public class ModelsFactory {
                 .name(faker.name().fullName() + "_Project.")
                 .announcement(faker.lordOfTheRings().location())
                 .show_announcement(random.nextBoolean())
-                .suite_mode(random.nextInt(3) + 1)
+                .suite_mode(1)
                 .build();
     }
 
-    public String stringGenerator(int numberOfSymbols) {
+    public static Section getSection() {
+
+        return Section.builder()
+                .name(faker.name().fullName() + "_Section.")
+                .description(faker.harryPotter().book())
+                .build();
+    }
+
+    public static Cases getCases() {
+
+        return Cases.builder()
+                .title(faker.lordOfTheRings().location())
+                .refs(faker.animal().name())
+                .build();
+    }
+
+    public static String stringGenerator(int numberOfSymbols) {
         String [] symbols = "012345678qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM".split("");
         StringBuilder newGeneratedString = new StringBuilder();
         for (int i = 0; i < numberOfSymbols; i++) {
