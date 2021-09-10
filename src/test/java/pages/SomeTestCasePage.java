@@ -14,7 +14,7 @@ public class SomeTestCasePage extends BasePage {
 
     private final static By TEST_CASES_TITLE = By.className("content-header-id");
     private final static By TEST_CASES_TITLE_NAME = By.cssSelector(".page_title");
-    private final static By ENTITY_ATTACHMENT_LIST = By.id("entityAttachmentListEmptyIcon");
+  //  private final static By ENTITY_ATTACHMENT_LIST = By.id("entityAttachmentListEmptyIcon");
 
     public SomeTestCasePage(BrowsersService browsersService, boolean openPageByUrl) {
         super(browsersService, openPageByUrl);
@@ -34,7 +34,7 @@ public class SomeTestCasePage extends BasePage {
         }
     }
 
-    private Button getEntityAttachmentField(){ return new Button(browsersService,ENTITY_ATTACHMENT_LIST);}
+   // private Button getEntityAttachmentField(){ return new Button(browsersService,ENTITY_ATTACHMENT_LIST);}
 
     private WebElement getTestCasesInstallationName(){
 
@@ -45,7 +45,8 @@ public class SomeTestCasePage extends BasePage {
         return browsersService.getWaiters().waitForVisibility(TEST_CASES_TITLE_NAME);
     }
 
-    public void clickEntityAttachmentFieldButton(){
-        getEntityAttachmentField().click();
-    }
+//    public AttachFileWindow clickEntityAttachmentFieldButton(){
+//        getEntityAttachmentField().click();
+//        return new AttachFileWindow(browsersService);
+//    }
 }
