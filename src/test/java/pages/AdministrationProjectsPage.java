@@ -1,15 +1,16 @@
 package pages;
 
-import baseEntities.BasePage;
 import core.BrowsersService;
 import core.ReadProperties;
 import models.Project;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import pages.baseHeaderPage.HeaderDashboard;
+import pages.conformationPages.ConfirmationDeleteWindow;
 import table.Table;
 
-public class AdministrationProjectsPage extends BasePage {
+public class AdministrationProjectsPage extends HeaderDashboard {
     private static Table table;
     private static final String endpoint = "/index.php?/admin/projects/overview";
 
@@ -47,7 +48,11 @@ public class AdministrationProjectsPage extends BasePage {
        return new ConfirmationDeleteWindow(browsersService)
                 .checkBoxDelete()
                 .clickButtonOk();
+    }
 
+    public ConfirmationDeleteWindow openConformationDeleteWindow(Project project){
+        table.getDeleteCell(project.getName()).click();
+        return new ConfirmationDeleteWindow(browsersService);
     }
 
     public boolean projectIsFound(Project project){return table.presentInTheTable(project.getName());}

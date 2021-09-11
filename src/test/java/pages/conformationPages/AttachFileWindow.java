@@ -1,4 +1,4 @@
-package pages;
+package pages.conformationPages;
 
 import baseEntities.BasePage;
 import core.BrowsersService;
@@ -6,6 +6,7 @@ import executors.RobotExecutor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import pages.AddTestCasePage;
 import wrappers.Button;
 
 import java.awt.*;
@@ -24,7 +25,6 @@ public class AttachFileWindow extends BasePage {
 
     @Override
     protected void openPage() {
-
     }
 
     @Override
@@ -77,7 +77,7 @@ public class AttachFileWindow extends BasePage {
     }
 
     /***
-     *  метод запускает робота для загрузки файла, и ждет пять сек. пока не появится кнопка
+     *  метод запускает робота для загрузки файла, и ждет 10 сек. пока не появится кнопка
      *                            DELETE
      */
 

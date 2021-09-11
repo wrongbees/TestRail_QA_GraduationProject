@@ -7,7 +7,6 @@ import java.io.File;
 import java.util.Objects;
 
 public class RobotExecutor {
-    private static Robot robot;
 
     static {
         try {
@@ -17,6 +16,7 @@ public class RobotExecutor {
         }
     }
 
+    private static Robot robot;
     private static ClassLoader classLoader;
     private static File file;
     private static StringSelection stringSelection;

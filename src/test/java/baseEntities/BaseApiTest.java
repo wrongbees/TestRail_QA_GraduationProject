@@ -13,6 +13,8 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 
+import java.net.MalformedURLException;
+
 import static io.restassured.RestAssured.given;
 
 public abstract class BaseApiTest {
@@ -22,7 +24,7 @@ public abstract class BaseApiTest {
 
 
     @BeforeMethod
-    public void startBrowser() {
+    public void startBrowser() throws MalformedURLException {
         browsersService = new BrowsersService();
     }
 

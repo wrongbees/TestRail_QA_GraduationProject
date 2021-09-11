@@ -14,7 +14,7 @@ import wrappers.RadioButton;
 
 public class AddProjectPage extends BasePage {
 
-    private final static String ENDPOINT = "index.php?/admin/projects/add/1";//???
+    private final static String ENDPOINT = "index.php?/admin/projects/add/%d";//???
 
     private final static By ADD_PROJECT_PAGE_TITLE = By.className("content-header-title");
     private final static By NAME_PROJECT_INPUT = By.id("name");
@@ -96,7 +96,7 @@ public class AddProjectPage extends BasePage {
         setShowAnnouncementProjectCheckBox(project.isShow_announcement());
         setRadioButtonAddProject(project.getSuite_mode());
         clickAddProjectButton();
-        return new AdministrationProjectsPage(browsersService,false); //??
+        return new AdministrationProjectsPage(browsersService,false);
 
     }
 

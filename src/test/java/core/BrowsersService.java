@@ -6,13 +6,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import utils.Waits;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class BrowsersService {
     private WebDriver driver = null;
     private Waits waiters;
 
-    public BrowsersService() {
+    public BrowsersService() throws MalformedURLException {
         switch (ReadProperties.getInstance().getBrowserName().toLowerCase()) {
             case "chrome" :
                 WebDriverManager.getInstance(DriverManagerType.CHROME).setup();
@@ -30,6 +34,11 @@ public class BrowsersService {
                 WebDriverManager.getInstance(DriverManagerType.FIREFOX).setup();
                 driver = new FirefoxDriver();
             break;
+
+            case "remote_chrome" :
+                chromeOptions = new ChromeOptions();
+                driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"),chromeOptions);
+                break;
 
             default : System.out.println("Browser " + ReadProperties.getInstance().getBrowserName() + " is not supported.");
         }

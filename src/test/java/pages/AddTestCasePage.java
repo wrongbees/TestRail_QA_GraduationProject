@@ -7,6 +7,7 @@ import models.Cases;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import pages.conformationPages.AttachFileWindow;
 import wrappers.Button;
 import wrappers.InputField;
 
@@ -80,10 +81,19 @@ public class AddTestCasePage extends BasePage {
         return this;
     }
 
+    /***
+     *
+     * этот метод возможно не мой
+     */
     public SomeTestCasePage clickAddTestCaseButton() {
         getAddTestCaseButton()
                 .click();
         return new SomeTestCasePage(browsersService, false);
+    }
+
+    public void clickAddTestCaseButtonWithoutReturn() {
+        getAddTestCaseButton()
+                .click();
     }
 
     public SomeTestCasePage successfullyAddTestCase(String testCaseTitle) {
@@ -109,7 +119,7 @@ public class AddTestCasePage extends BasePage {
 
     public AddTestCasePage unsuccessfullyAddTestCase(String testCaseTitle) {
         inputTestCaseTitle(testCaseTitle);
-        clickAddTestCaseButton();
+        clickAddTestCaseButtonWithoutReturn();
         return this;
     }
 

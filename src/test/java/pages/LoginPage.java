@@ -17,6 +17,7 @@ public class LoginPage extends BasePage {
     private final static By EMAIL_FIELD = By.id("name");
     private final static By PASSWORD_FIELD = By.id("password");
     private final static By BUTTON_FIELD = By.id("button_primary");
+    private final static By INCORRECT_LOGIN_MESSAGE = By.className("error-text");
 
     public LoginPage(BrowsersService browsersService, boolean openPageByUrl) {
         super(browsersService, openPageByUrl);
@@ -52,22 +53,8 @@ public class LoginPage extends BasePage {
         return new Button(browsersService, BUTTON_FIELD);
     }
 
-    public DashboardPage successfulLogin() {
-        inputEmail(ReadProperties.getInstance().getUsername())
-                .inputPasswordField(ReadProperties.getInstance().getPassword())
-                .clickButton();
-        return new DashboardPage(browsersService, true);
-    }
-
-    public LoginPage unsuccessfulLogin(String email, String password) {
-
-        if (email == null & password == null) {
-            return this;
-        }
-        inputEmail(email);
-        inputPasswordField(password);
-        clickButton();
-        return this;
+    private WebElement getIncorrectLoginMessage() {
+        return browsersService.getWaiters().waitForVisibility(INCORRECT_LOGIN_MESSAGE);
     }
 
     private LoginPage inputEmail(String email) {
@@ -85,6 +72,24 @@ public class LoginPage extends BasePage {
     private void clickButton() {
         getLoginButton()
                 .click();
+    }
+
+    public String getErrorLoginMessageTest(){
+       return getIncorrectLoginMessage().getText();
+    }
+
+    public DashboardPage successfulLogin() {
+        inputEmail(ReadProperties.getInstance().getUsername())
+                .inputPasswordField(ReadProperties.getInstance().getPassword())
+                .clickButton();
+        return new DashboardPage(browsersService, true);
+    }
+
+    public LoginPage unsuccessfulLogin() {
+        inputEmail(ReadProperties.getInstance().getUsername());
+        inputPasswordField(ReadProperties.getInstance().getUsername());
+        clickButton();
+        return this;
     }
 }
 

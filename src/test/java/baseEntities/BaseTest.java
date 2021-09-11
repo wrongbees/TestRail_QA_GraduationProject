@@ -4,11 +4,13 @@ import core.BrowsersService;
 
 import org.testng.annotations.*;
 
+import java.net.MalformedURLException;
+
 public abstract class BaseTest {
     public BrowsersService browsersService;
 
     @BeforeMethod
-    public void startBrowser() {
+    public void startBrowser() throws MalformedURLException {
         browsersService = new BrowsersService();
     }
 

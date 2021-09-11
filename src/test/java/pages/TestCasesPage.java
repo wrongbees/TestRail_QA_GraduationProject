@@ -10,10 +10,11 @@ import wrappers.Button;
 
 public class TestCasesPage extends BasePage {
 
-    private final static String ENDPOINT = "index.php?/suites/view/2";//???
+    private final static String ENDPOINT = "index.php?/suites/view/%d";
 
     private final static By TEST_CASES_TITLE = By.cssSelector(".page_title");
     private final static By ADD_TEST_CASE_BUTTON = By.id("sidebar-cases-add");
+    private final static By OPEN = By.id("sidebar-cases-add");
 
     public TestCasesPage(BrowsersService browsersService, boolean openPageByUrl) {
         super(browsersService, openPageByUrl);
