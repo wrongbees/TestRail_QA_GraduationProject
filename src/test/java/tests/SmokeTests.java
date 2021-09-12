@@ -7,6 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.*;
 import pages.conformationPages.ConfirmationDeleteWindow;
+import pages.testcasePage.AddEditTestCasePage;
 
 public class SmokeTests extends BaseTest {
     Project project;
@@ -23,7 +24,7 @@ public class SmokeTests extends BaseTest {
     @Test
     public void positiveUploadingFileTest() {
         this.project = ModelsFactory.getProject();
-        AddTestCasePage addTestCasePage = new LoginPage(browsersService, true)
+        AddEditTestCasePage addTestCasePage = new LoginPage(browsersService, true)
                 .successfulLogin()
                 .clickAddProjectButton()
                 .addProject(project)
@@ -55,7 +56,7 @@ public class SmokeTests extends BaseTest {
 
     @Test(dependsOnMethods = "positiveUploadingFileTest")
     public void negativeNullBoundaryValueTest() {
-        AddTestCasePage addTestCasePage = new LoginPage(browsersService, true)
+        AddEditTestCasePage addTestCasePage = new LoginPage(browsersService, true)
                 .successfulLogin()
                 .clickProjectLink(project)
                 .clickDashboardTestCaseButton()

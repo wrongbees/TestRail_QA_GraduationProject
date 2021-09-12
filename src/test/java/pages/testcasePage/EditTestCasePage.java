@@ -1,4 +1,4 @@
-package pages;
+package pages.testcasePage;
 
 import baseEntities.BasePage;
 import core.BrowsersService;
@@ -7,23 +7,23 @@ import models.Cases;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import pages.SomeTestCasePage;
 import pages.conformationPages.AttachFileWindow;
 import wrappers.Button;
 import wrappers.InputField;
 
-public class AddTestCasePage extends BasePage {
-
-    private final static String ENDPOINT = "index.php?/cases/add/2";//???
+public class EditTestCasePage extends BasePage {
+    private final static String ENDPOINT = "index.php?/cases/edit/%d";//???
 
     private final static By TEST_CASE_TITLE_LABEL = By.xpath("//label[@for = 'title']");
     private final static By TEST_CASE_TITLE_INPUT = By.id("title");
-    private final static By ADD_TEST_CASE_BUTTON = By.id("accept");
+    private final static By SAVE_TEST_CASE_BUTTON = By.id("accept");
     private final static By TEST_CASE_ERROR_LABEL = By.xpath("//*[contains(text(),'Field')]");
     private final static By REFERENCE_FIELD = By.id("refs");
-    private final static By ENTITY_ATTACHMENT_LIST = By.id("entityAttachmentListEmptyIcon");
+    private final static By ENTITY_ATTACHMENT_LIST = By.id("entityAttachmentListAdd");
     private final static By FIRST_FILE_IN_ATTACHMENT_LIST = By.xpath("//*[@id = 'entityAttachmentList']//div[@contenteditable='false']");
 
-    public AddTestCasePage(BrowsersService browsersService, boolean openPageByUrl) {
+    public EditTestCasePage(BrowsersService browsersService, boolean openPageByUrl) {
         super(browsersService, openPageByUrl);
     }
 
@@ -61,23 +61,23 @@ public class AddTestCasePage extends BasePage {
         return new Button(browsersService, ENTITY_ATTACHMENT_LIST);
     }
 
-    private Button getAddTestCaseButton() {
-        return new Button(browsersService, ADD_TEST_CASE_BUTTON);
+    public Button getSaveTestCaseButton() {
+        return new Button(browsersService, SAVE_TEST_CASE_BUTTON);
     }
 
     public WebElement getTestCaseErrorLabel() {
         return browsersService.getWaiters().waitForVisibility(TEST_CASE_ERROR_LABEL);
     }
 
-    private AddTestCasePage inputTestCaseTitle(String testCaseTitle) {
-        getTestCaseTitleInput()
-                .sendKeys(testCaseTitle);
+    private EditTestCasePage inputTestCaseTitle(String testCaseTitle) {//
+        getTestCaseTitleInput()                                       //ужен ли нам этот метод???
+                .sendKeys(testCaseTitle);                             //
         return this;
     }
 
-    private AddTestCasePage inputReferenceField(String caseTitle) {
-        getReferenceInputField()
-                .sendKeys(caseTitle);
+    private EditTestCasePage inputReferenceField(String caseTitle) {//
+        getReferenceInputField()                                   //Нужен ли нам этот метод????
+                .sendKeys(caseTitle);                              //
         return this;
     }
 
@@ -86,15 +86,16 @@ public class AddTestCasePage extends BasePage {
      * этот метод возможно не мой
      */
     public SomeTestCasePage clickAddTestCaseButton() {
-        getAddTestCaseButton()
+        getSaveTestCaseButton()
                 .click();
         return new SomeTestCasePage(browsersService, false);
     }
 
-    public void clickAddTestCaseButtonWithoutReturn() {
-        getAddTestCaseButton()
+    public void clickAddTestCaseButtonWithoutReturn() {//
+        getSaveTestCaseButton()                     // Это нам нужно?
                 .click();
     }
+
 
     public SomeTestCasePage successfullyAddTestCase(String testCaseTitle) {
         inputTestCaseTitle(testCaseTitle);
@@ -107,7 +108,7 @@ public class AddTestCasePage extends BasePage {
      *
      *
      */
-    public AddTestCasePage addTestCase(Cases someCase) {
+    public EditTestCasePage addTestCase(Cases someCase) {
         if (someCase.getTitle() != null) {
             inputTestCaseTitle(someCase.getTitle());
         }
@@ -117,7 +118,7 @@ public class AddTestCasePage extends BasePage {
         return this;
     }
 
-    public AddTestCasePage unsuccessfullyAddTestCase(String testCaseTitle) {
+    public EditTestCasePage unsuccessfullyAddTestCase(String testCaseTitle) {
         inputTestCaseTitle(testCaseTitle);
         clickAddTestCaseButtonWithoutReturn();
         return this;
@@ -127,9 +128,10 @@ public class AddTestCasePage extends BasePage {
         getEntityAttachmentField().click();
         return new AttachFileWindow(browsersService);
     }
-//!!!!!!!!!!!!!!!!!!! метод возвращает имя файл обрезая фразу (Click and hold to enter delete mode)
+
+    //!!!!!!!!!!!!!!!!!!! метод возвращает имя файл обрезая фразу (Click and hold to enter delete mode)
     public String getFirstFileName() {
         return getFirstFileInAttachmentList().getAttribute("title")
-                .replace("(Click and hold to enter delete mode)","").trim();
+                .replace("(Click and hold to enter delete mode)", "").trim();
     }
 }

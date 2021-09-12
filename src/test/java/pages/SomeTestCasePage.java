@@ -6,13 +6,20 @@ import core.ReadProperties;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import pages.testcasePage.AddEditTestCasePage;
+import pages.testcasePage.EditTestCasePage;
+import wrappers.Button;
+
+import java.security.PrivilegedAction;
 
 public class SomeTestCasePage extends BasePage {
 
     private final static String ENDPOINT = "index.php?/cases/view/%d";//???
 
     private final static By TEST_CASES_TITLE = By.className("content-header-id");
+    private final static By TEST_CASES_NAME = By.className("content-header-title page_title");
     private final static By TEST_CASES_TITLE_NAME = By.cssSelector(".page_title");
+    private final static By EDIT_TEST_CASES_BUTTON = By.cssSelector(".button-text");
 
     public SomeTestCasePage(BrowsersService browsersService, boolean openPageByUrl) {
         super(browsersService, openPageByUrl);
@@ -39,6 +46,18 @@ public class SomeTestCasePage extends BasePage {
 
     public WebElement getTestCaseName(){
         return browsersService.getWaiters().waitForVisibility(TEST_CASES_TITLE_NAME);
+    }
+
+
+
+    private Button getEditTestCaseButton(){ return new Button(browsersService, EDIT_TEST_CASES_BUTTON);}
+
+    public AddEditTestCasePage clickEditTestCaseButton(){
+        getEditTestCaseButton().click();
+        return  new AddEditTestCasePage(browsersService,false);
+    }
+    public String getTitleText(){
+        return getTestCaseName().getText();
     }
 
 }

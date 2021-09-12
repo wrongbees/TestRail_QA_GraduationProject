@@ -5,7 +5,7 @@ import models.ModelsFactory;
 import models.Project;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.AddTestCasePage;
+import pages.testcasePage.AddEditTestCasePage;
 import pages.AdministrationProjectsPage;
 import pages.LoginPage;
 
@@ -35,7 +35,7 @@ public class TestTest extends BaseTest {
      *
      *  Появился AttachFileWindow
      *
-     *  Посмотри изменения в AddTestCasePage
+     *  Посмотри изменения в AddEditTestCasePage
      *
      *  Появился класс RobotExecutor
      *
@@ -46,7 +46,7 @@ public class TestTest extends BaseTest {
                 .name("Ms. Sheila Blick_Project.")     //  эти строчки подлежат удалению
                 .build();                              //
 
-        AddTestCasePage addTestCasePage = new LoginPage(browsersService, true)
+        AddEditTestCasePage addTestCasePage = new LoginPage(browsersService, true)
                 .successfulLogin()
                 .clickProjectLink(project)
                 .clickDashboardTestCaseButton()

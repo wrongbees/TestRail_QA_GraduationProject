@@ -6,10 +6,8 @@ import executors.RobotExecutor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
-import pages.AddTestCasePage;
+import pages.testcasePage.AddEditTestCasePage;
 import wrappers.Button;
-
-import java.awt.*;
 
 public class AttachFileWindow extends BasePage {
 
@@ -70,10 +68,9 @@ public class AttachFileWindow extends BasePage {
         getDeleteButton().click();
     }
 
-    public AddTestCasePage clickAttachButton() {
+    public AddEditTestCasePage clickAttachButton() {
         getAttachButton().click();
-        System.out.println("click");
-        return new AddTestCasePage(browsersService, false);
+        return new AddEditTestCasePage(browsersService, false);
     }
 
     /***

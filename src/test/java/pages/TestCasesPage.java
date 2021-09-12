@@ -6,6 +6,7 @@ import core.ReadProperties;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import pages.testcasePage.AddEditTestCasePage;
 import wrappers.Button;
 
 public class TestCasesPage extends BasePage {
@@ -42,9 +43,9 @@ public class TestCasesPage extends BasePage {
         return new Button(browsersService,ADD_TEST_CASE_BUTTON);
     }
 
-    public AddTestCasePage clickAddTestCaseButton(){
+    public AddEditTestCasePage clickAddTestCaseButton(){
         getAddTestCaseButton()
                 .click();
-        return new AddTestCasePage(browsersService,false);
+        return new AddEditTestCasePage(browsersService,false);
     }
 }
