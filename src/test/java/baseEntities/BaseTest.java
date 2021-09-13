@@ -6,6 +6,7 @@ import org.testng.annotations.*;
 
 import java.net.MalformedURLException;
 
+@Listeners(Listener.class)
 public abstract class BaseTest {
     public BrowsersService browsersService;
 

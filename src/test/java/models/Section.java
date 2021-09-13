@@ -8,16 +8,16 @@ import lombok.Data;
 @Builder
 public class Section {
     @Expose
-    String name;
+    int id;
     @Expose
-    int depth;
+    int suit_id;
+    @Expose
+    String name;
     @Expose
     String description;
     @Expose
     int display_order;
     @Expose
-    int id;
-//    @Expose
-//    int parent_id;
+    int depth;
 
 }

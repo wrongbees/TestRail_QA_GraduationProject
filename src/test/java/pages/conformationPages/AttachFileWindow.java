@@ -6,7 +6,7 @@ import executors.RobotExecutor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
-import pages.testcasePage.AddEditTestCasePage;
+import pages.AddEditTestCasePage;
 import wrappers.Button;
 
 public class AttachFileWindow extends BasePage {

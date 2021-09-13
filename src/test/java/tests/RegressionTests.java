@@ -1,89 +1,106 @@
 package tests;
 
 import baseEntities.BaseTest;
-import models.Cases;
 import models.ModelsFactory;
 import models.Project;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.AdministrationProjectsPage;
-import pages.LoginPage;
-import pages.SomeTestCasePage;
-import pages.testcasePage.AddEditTestCasePage;
+import pages.*;
+import pages.conformationPages.ConfirmationDeleteWindow;
+import pages.AddEditTestCasePage;
 
 public class RegressionTests extends BaseTest {
     Project project;
-    Cases cases;
 
     @Test
     public void negativeLoginTest(){
-       LoginPage loginPage = new LoginPage(browsersService,true)
+        LoginPage loginPage = new LoginPage(browsersService,true)
                 .unsuccessfulLogin();
 
-       Assert.assertEquals(loginPage.getErrorLoginMessageTest(), "Email/Login or Password is incorrect. Please try again.");
+        Assert.assertEquals(loginPage.getErrorLoginMessageTest(), "Email/Login or Password is incorrect. Please try again.");
     }
 
     @Test(dependsOnMethods = "negativeLoginTest")
-    public void positiveAddProjectTest() {
-        this.project = ModelsFactory.getProject();
-        AdministrationProjectsPage adminPage = new LoginPage(browsersService, true)
+    public void positivePopUpMessageTest() {
+        DashboardPage dashboardPage = new LoginPage(browsersService, true)
                 .successfulLogin()
-                .clickAddProjectButton()
-                .addProject(project);
+                .actionForPopUp();
 
-        Assert.assertTrue(adminPage.projectIsFound(project));
+        Assert.assertEquals(dashboardPage.getPopUpMessageTitleText(), "Compact View");
     }
 
-    /***
-     * Здесь можно вставить заваленный тест на редактирование тест-кейса (в этом же проекте сделать тест кейс
-     *
-     * AddEditTestCasePage - рассмотреть методы
-     *
-     * EditTestCasePage - добавлен, т.к. отличаются энд поинты (возможно нужно сделать один базовый класс)
-     *
-     * SomeTestCasePage - добавлена кнопка EDIT_TEST_CASES_BUTTON? с соответствующими методами...
-     */
-    @Test
-    public void positiveEditTestCase(){
-        project = Project.builder()               //
-                .name("Doloris Barton_Project.")  // подлежит удалению
-                .build();                         //
+    @Test(dependsOnMethods = "positivePopUpMessageTest")
+    public void positiveUploadingFileTest() {
+        this.project = ModelsFactory.getProject();
+        AddEditTestCasePage addTestCasePage = new LoginPage(browsersService, true)
+                .successfulLogin()
+                .clickAddProjectButton()
+                .addProject(project)
+                .clickReturnDashboardPageButton()
+                .clickProjectLink(project)
+                .clickDashboardTestCaseButton()
+                .clickAddTestCaseButton()
+                .addTestCase(ModelsFactory.getCases())
+                .clickEntityAttachmentFieldButton()
+                .downloadFile("config.properties")
+                .clickAttachButton();
 
-        cases = ModelsFactory.getCases();
+        Assert.assertEquals(addTestCasePage.getFirstFileName(), "config.properties");
+    }
 
-        SomeTestCasePage someTestCasePage = new LoginPage(browsersService,true)
+    @Test(dependsOnMethods = "positiveUploadingFileTest",
+            dataProvider = "BoundaryInputFiledValue",
+            dataProviderClass = DataProvider.class)
+    public void positiveBoundaryValuesTest(int numberOfValuesInputFiled) {
+        String newGeneratedString = ModelsFactory.stringGenerator(numberOfValuesInputFiled);
+        SomeTestCasePage someTestCasePage = new LoginPage(browsersService, true)
                 .successfulLogin()
                 .clickProjectLink(project)
                 .clickDashboardTestCaseButton()
                 .clickAddTestCaseButton()
-                .addTestCase(cases)
-                .clickEntityAttachmentFieldButton()
-                .downloadFile("StartTest.xml")
-                .clickAttachButton()
-                .clickAddTestCaseButton()
-                .clickEditTestCaseButton()
-                .clickEntityAttachmentFieldButton()
-                .downloadFile("pooh.jpg")
-                .clickAttachButton()
-                .clickAddTestCaseButton();
-
-      Assert.assertEquals(someTestCasePage.getTitleText(),cases.getTitle());
-
+                .successfullyAddTestCase(newGeneratedString);
+        Assert.assertEquals(someTestCasePage.getTestCaseName().getText(), newGeneratedString);
     }
 
-    /***
-     * Будем менять на аннотацию?
-     * (expectedExceptions = NullPointerException.class, expectedExceptionsMessageRegExp = "Project not found")
-     */
-    @Test (dependsOnMethods = "positiveAddProjectTest")
-    public void positiveDeleteProjectTest() {
-      AdministrationProjectsPage adminPage = new LoginPage(browsersService, true)
+    @Test(dependsOnMethods = "positiveUploadingFileTest")
+    public void negativeNullBoundaryValueTest() {
+        AddEditTestCasePage addTestCasePage = new LoginPage(browsersService, true)
+                .successfulLogin()
+                .clickProjectLink(project)
+                .clickDashboardTestCaseButton()
+                .clickAddTestCaseButton()
+                .unsuccessfullyAddTestCase("");
+
+        Assert.assertEquals(addTestCasePage.getTestCaseErrorLabel().getText(),
+                "Field Title is a required field.");
+    }
+
+    @Test(dependsOnMethods = "positiveUploadingFileTest",
+            dataProvider = "NegativeBoundaryInputFiledValue",
+            dataProviderClass = DataProvider.class)
+    public void negativeBoundaryValuesTest(int numberOfValuesInputFiled) {
+        int maxValueSymbolsInString = 250;
+        String newGeneratedString = ModelsFactory.stringGenerator(numberOfValuesInputFiled);
+        SomeTestCasePage someTestCasePage = new LoginPage(browsersService, true)
+                .successfulLogin()
+                .clickProjectLink(project)
+                .clickDashboardTestCaseButton()
+                .clickAddTestCaseButton()
+                .successfullyAddTestCase(newGeneratedString);
+        String actualResult = someTestCasePage.getTestCaseName().getText();
+        String expectedResult = newGeneratedString.substring(0, maxValueSymbolsInString);
+
+        Assert.assertEquals(actualResult, expectedResult);
+    }
+
+    @Test(dependsOnMethods = "positiveUploadingFileTest")
+    public void positiveDialogBoxDisplayTest() {
+        ConfirmationDeleteWindow deleteWindow = new LoginPage(browsersService, true)
                 .successfulLogin()
                 .clickAdministrationButton()
                 .clickProjectsButton()
-                .deleteProject(project);
+                .openConformationDeleteWindow(project);
 
-        Assert.assertThrows(java.lang.NullPointerException.class, () -> adminPage.deleteProject(project));
+        Assert.assertEquals(deleteWindow.getWindowTitleText(), "Confirmation");
     }
-
 }

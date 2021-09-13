@@ -1,98 +1,62 @@
 package tests;
 
 import baseEntities.BaseTest;
+import models.Cases;
 import models.ModelsFactory;
 import models.Project;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.*;
-import pages.conformationPages.ConfirmationDeleteWindow;
-import pages.testcasePage.AddEditTestCasePage;
+import pages.AddEditTestCasePage;
+import pages.AdministrationProjectsPage;
+import pages.LoginPage;
 
 public class SmokeTests extends BaseTest {
     Project project;
+    Cases cases;
 
     @Test
-    public void positivePopUpMessageTest() {
-        DashboardPage dashboardPage = new LoginPage(browsersService, true)
-                .successfulLogin()
-                .actionForPopUp();
-
-        Assert.assertEquals(dashboardPage.getPopUpMessageTitleText(), "Compact View");
-    }
-
-    @Test
-    public void positiveUploadingFileTest() {
+    public void positiveAddProjectTest() {
         this.project = ModelsFactory.getProject();
-        AddEditTestCasePage addTestCasePage = new LoginPage(browsersService, true)
+        AdministrationProjectsPage adminPage = new LoginPage(browsersService, true)
                 .successfulLogin()
                 .clickAddProjectButton()
-                .addProject(project)
-                .clickReturnDashboardPageButton()
+                .addProject(project);
+
+        Assert.assertTrue(adminPage.projectIsFound(project));
+    }
+
+    @Test(dependsOnMethods = "positiveAddProjectTest")
+
+    public void positiveEditTestCaseTest() {
+        cases = ModelsFactory.getCases();
+
+        AddEditTestCasePage addEditTestCasePage = new LoginPage(browsersService, true)
+                .successfulLogin()
                 .clickProjectLink(project)
                 .clickDashboardTestCaseButton()
                 .clickAddTestCaseButton()
-                .addTestCase(ModelsFactory.getCases())
+                .addTestCase(cases)
                 .clickEntityAttachmentFieldButton()
-                .downloadFile("config.properties")
+                .downloadFile("StartTest.xml")
+                .clickAttachButton()
+                .clickAddTestCaseButton()
+                .clickEditTestCaseButton()
+                .clickEntityAttachmentFieldButton()
+                .downloadFile("pooh.jpg")
                 .clickAttachButton();
 
-        Assert.assertEquals(addTestCasePage.getFirstFileName(), "config.properties");
+        Assert.assertTrue(addEditTestCasePage.getAddTestCaseButton().isEnabled());
     }
 
-    @Test(dependsOnMethods = "positiveUploadingFileTest",
-            dataProvider = "BoundaryInputFiledValue",
-            dataProviderClass = DataProvider.class)
-    public void positiveBoundaryValuesTest(int numberOfValuesInputFiled) {
-        String newGeneratedString = ModelsFactory.stringGenerator(numberOfValuesInputFiled);
-        SomeTestCasePage someTestCasePage = new LoginPage(browsersService, true)
-                .successfulLogin()
-                .clickProjectLink(project)
-                .clickDashboardTestCaseButton()
-                .clickAddTestCaseButton()
-                .successfullyAddTestCase(newGeneratedString);
-        Assert.assertEquals(someTestCasePage.getTestCaseName().getText(), newGeneratedString);
-    }
+    @Test(dependsOnMethods = "positiveEditTestCaseTest",alwaysRun = true)
 
-    @Test(dependsOnMethods = "positiveUploadingFileTest")
-    public void negativeNullBoundaryValueTest() {
-        AddEditTestCasePage addTestCasePage = new LoginPage(browsersService, true)
-                .successfulLogin()
-                .clickProjectLink(project)
-                .clickDashboardTestCaseButton()
-                .clickAddTestCaseButton()
-                .unsuccessfullyAddTestCase("");
-
-        Assert.assertEquals(addTestCasePage.getTestCaseErrorLabel().getText(),
-                "Field Title is a required field.");
-    }
-
-    @Test(dependsOnMethods = "positiveUploadingFileTest",
-            dataProvider = "NegativeBoundaryInputFiledValue",
-            dataProviderClass = DataProvider.class)
-    public void negativeBoundaryValuesTest(int numberOfValuesInputFiled) {
-        int maxValueSymbolsInString = 250;
-        String newGeneratedString = ModelsFactory.stringGenerator(numberOfValuesInputFiled);
-        SomeTestCasePage someTestCasePage = new LoginPage(browsersService, true)
-                .successfulLogin()
-                .clickProjectLink(project)
-                .clickDashboardTestCaseButton()
-                .clickAddTestCaseButton()
-                .successfullyAddTestCase(newGeneratedString);
-        String actualResult = someTestCasePage.getTestCaseName().getText();
-        String expectedResult = newGeneratedString.substring(0, maxValueSymbolsInString);
-
-        Assert.assertEquals(actualResult, expectedResult);
-    }
-
-    @Test(dependsOnMethods = "positiveUploadingFileTest")
-    public void positiveDialogBoxDisplayTest() {
-        ConfirmationDeleteWindow deleteWindow = new LoginPage(browsersService, true)
+    public void positiveDeleteProjectTest() {
+        AdministrationProjectsPage adminPage = new LoginPage(browsersService, true)
                 .successfulLogin()
                 .clickAdministrationButton()
                 .clickProjectsButton()
-                .openConformationDeleteWindow(project);
+                .deleteProject(project);
 
-        Assert.assertEquals(deleteWindow.getWindowTitleText(), "Confirmation");
+        Assert.assertThrows(java.lang.NullPointerException.class, () -> adminPage.deleteProject(project));
     }
 }

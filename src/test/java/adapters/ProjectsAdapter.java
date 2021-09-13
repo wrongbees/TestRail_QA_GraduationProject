@@ -4,6 +4,7 @@ import com.google.common.reflect.TypeToken;
 import endpoints.ProjectEndpoints;
 import io.restassured.mapper.ObjectMapperType;
 import io.restassured.response.Response;
+import models.Cases;
 import models.Project;
 import org.apache.http.HttpStatus;
 
@@ -40,8 +41,8 @@ public class ProjectsAdapter extends BaseAdapter {
         return gson.fromJson(response.asString().trim(), Project.class);
     }
 
-    public Response add(Project project){
-       return given()
+    public Project add(Project project){
+        Response response = given()
                 .body(project, ObjectMapperType.GSON)
                 .when()
                 .post(ProjectEndpoints.ADD_PROJECT)
@@ -49,6 +50,8 @@ public class ProjectsAdapter extends BaseAdapter {
                 .log().body()
                 .statusCode(HttpStatus.SC_OK)
                 .extract().response();
+        return gson.fromJson(response.asString().trim(), Project.class);
+
     }
 
     public void delete(int projectId){
