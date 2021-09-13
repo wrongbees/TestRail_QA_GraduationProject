@@ -6,12 +6,12 @@
             <class name="tests.TestRailApiExecutionTest"/>
         </classes>
     </test>
-    <test name="Regression Tests">
+    <test name="Smoke Tests">
         <classes>
             <class name="tests.SmokeTests"/>
         </classes>
     </test>
-    <test name="Smoke Tests">
+    <test name="Regression Tests">
         <classes>
             <class name="tests.RegressionTests"/>
         </classes>
