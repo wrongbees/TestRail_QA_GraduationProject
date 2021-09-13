@@ -3,7 +3,7 @@ package baseEntities;
 import core.BrowsersService;
 
 public abstract class BasePage {
-    protected static final int WAIT_FOR_PAGE_LOAD_IN_SECONDS = 5;
+    protected static final int WAIT_FOR_PAGE_LOAD_IN_SECONDS = 20;
     protected final BrowsersService browsersService;
 
     /**
