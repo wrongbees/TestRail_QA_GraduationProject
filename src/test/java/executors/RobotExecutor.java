@@ -33,7 +33,7 @@ public class RobotExecutor {
 
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
 
-        robot.setAutoDelay(500);
+        robot.setAutoDelay(3000);
         robot.keyPress(KeyEvent.VK_CONTROL);
         robot.keyPress(KeyEvent.VK_V);
 

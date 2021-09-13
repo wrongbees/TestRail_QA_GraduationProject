@@ -53,12 +53,12 @@ public class TestRailApiExecutionTest extends BaseApiTest {
         Response response = new CasesAdapter().getHistory(actualCases);
     }
 
-    @Test(dependsOnMethods = "getCasesTest")
+    @Test(dependsOnMethods = "getHistoryForCases")
     public void getHistoryForCasesFailedTest() {
         Response response = new CasesAdapter().getHistory(ModelsFactory.getCases());
     }
 
-    @Test(dependsOnMethods = "getHistoryForCases")
+    @Test(dependsOnMethods = "getHistoryForCasesFailedTest", alwaysRun = true)
     public void copyCasesToSectionTest() {
         Section sectionModels = ModelsFactory.getSection();
             
