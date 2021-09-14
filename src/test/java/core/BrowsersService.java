@@ -37,7 +37,7 @@ public class BrowsersService {
 
             case "remote_chrome" :
                 chromeOptions = new ChromeOptions();
-                driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"),chromeOptions);
+                driver = new RemoteWebDriver(new URL("http://192.168.10.3:4444/wd/hub"),chromeOptions);
                 break;
 
             default : System.out.println("Browser " + ReadProperties.getInstance().getBrowserName() + " is not supported.");

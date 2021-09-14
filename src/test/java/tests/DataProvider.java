@@ -6,7 +6,7 @@ public class DataProvider {
     public static Object[][] dataBoundaryInputFiledValue() {
         return new Object[][]{
                 {1},
-                {125},
+                {249},
                 {250},
         };
     }
@@ -15,7 +15,6 @@ public class DataProvider {
     public static Object[][] dataNegativeBoundaryInputFiledValue() {
         return new Object[][]{
                 {251},
-                {700},
         };
     }
 }
