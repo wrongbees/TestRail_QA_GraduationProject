@@ -12,6 +12,7 @@ import wrappers.Button;
 public class AttachFileWindow extends BasePage {
 
     private final static By WINDOW_TITLE = By.id("ui-dialog-title-attachmentNewDialogFile");
+
     private final static By ADD_NEW_BUTTON = By.id("libraryAddAttachment");
     private final static By ATTACH_BUTTON = By.id("attachmentNewSubmit");
     private final static By CANCEL_BUTTON = By.className("button button-right button-negative button-cancel dialog-action-close");
@@ -28,7 +29,8 @@ public class AttachFileWindow extends BasePage {
     @Override
     public boolean isPageOpened() {
         try {
-            return getWindowTitle().isDisplayed();
+            return getAddNewButton().isEnabled();
+
         } catch (NoSuchElementException e) {
             return false;
         }
