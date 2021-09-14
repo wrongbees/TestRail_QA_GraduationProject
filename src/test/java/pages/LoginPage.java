@@ -74,8 +74,8 @@ public class LoginPage extends BasePage {
                 .click();
     }
 
-    public String getErrorLoginMessageTest(){
-       return getIncorrectLoginMessage().getText();
+    public String getErrorLoginMessageTest() {
+        return getIncorrectLoginMessage().getText();
     }
 
     public DashboardPage successfulLogin() {
@@ -86,9 +86,16 @@ public class LoginPage extends BasePage {
     }
 
     public LoginPage unsuccessfulLogin() {
-        inputEmail(ReadProperties.getInstance().getUsername());
-        inputPasswordField(ReadProperties.getInstance().getUsername());
-        clickButton();
+        inputEmail(ReadProperties.getInstance().getUsername())
+                .inputPasswordField(ReadProperties.getInstance().getUsername())
+                .clickButton();
+        return this;
+    }
+
+    public LoginPage loginWithParameters(String email, String password) {
+        inputEmail(email)
+                .inputPasswordField(password)
+                .clickButton();
         return this;
     }
 }

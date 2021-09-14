@@ -1,6 +1,7 @@
 package tests;
 
 import baseEntities.BaseTest;
+import core.ReadProperties;
 import models.ModelsFactory;
 import models.Project;
 import org.testng.Assert;
@@ -21,6 +22,14 @@ public class RegressionTests extends BaseTest {
     }
 
     @Test(dependsOnMethods = "negativeLoginTest")
+    public void negativeSafetyTest(){
+        LoginPage loginPage = new LoginPage(browsersService,true)
+               .loginWithParameters("SELECT * FROM users WHERE id=1'", ReadProperties.getInstance().getPassword());
+
+        Assert.assertEquals(loginPage.getErrorLoginMessageTest(), "Email/Login or Password is incorrect. Please try again.");
+    }
+
+    @Test(dependsOnMethods = "negativeSafetyTest")
     public void positivePopUpMessageTest() {
         DashboardPage dashboardPage = new LoginPage(browsersService, true)
                 .successfulLogin()
@@ -50,7 +59,7 @@ public class RegressionTests extends BaseTest {
 
     @Test(dependsOnMethods = "positiveUploadingFileTest",
             dataProvider = "BoundaryInputFiledValue",
-            dataProviderClass = DataProvider.class)
+            dataProviderClass = DataProvider.class,alwaysRun = true)
     public void positiveBoundaryValuesTest(int numberOfValuesInputFiled) {
         String newGeneratedString = ModelsFactory.stringGenerator(numberOfValuesInputFiled);
         SomeTestCasePage someTestCasePage = new LoginPage(browsersService, true)

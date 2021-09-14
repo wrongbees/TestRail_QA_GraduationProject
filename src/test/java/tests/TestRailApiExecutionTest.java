@@ -55,28 +55,31 @@ public class TestRailApiExecutionTest extends BaseApiTest {
 
     @Test(dependsOnMethods = "getHistoryForCases")
     public void getHistoryForCasesFailedTest() {
-        Response response = new CasesAdapter().getHistory(ModelsFactory.getCases());
-    }
-
-    @Test(dependsOnMethods = "getHistoryForCasesFailedTest", alwaysRun = true)
-    public void copyCasesToSectionTest() {
-        Section sectionModels = ModelsFactory.getSection();
-            
-        Section newSection = new SectionAdapter().add(sectionModels, project.getId());
-
-        String case_ids = "";
-        for (Cases item : actualCaseslist)
-            case_ids = case_ids + ", " + item.getId();
-        String caseIds = case_ids.substring(2);
-        System.out.println(caseIds);
-
-        new CasesAdapter().copy(newSection.getId(), caseIds);
+        Cases actualCases = ModelsFactory.getCases();
+        Response response = new CasesAdapter().getHistory(actualCases);
     }
 
 
+//   // @Test(dependsOnMethods = "getHistoryForCases",alwaysRun = true)
+//    @Test(dependsOnMethods = "getHistoryForCasesFailedTest", alwaysRun = true)
+//    public void copyCasesToSectionTest() {
+//        Section sectionModels = ModelsFactory.getSection();
+//
+//        Section newSection = new SectionAdapter().add(sectionModels, project.getId());
+//
+//        String case_ids = "";
+//        for (Cases item : actualCaseslist)
+//            case_ids = case_ids + ", " + item.getId();
+//        String caseIds = case_ids.substring(2);
+//        System.out.println(caseIds);
+//
+//        new CasesAdapter().copy(newSection.getId(), caseIds);
+//    }
 
-    @Test(dependsOnMethods = "copyCasesToSectionTest")
-  // @Test(dependsOnMethods = "updateCasesTest")
+
+
+    @Test(dependsOnMethods = "getHistoryForCases",alwaysRun = true)
+
     public void updateCaseTest() {
         Cases expected_cases = Cases.builder()
                 .title("TITLE №00")
@@ -88,17 +91,15 @@ public class TestRailApiExecutionTest extends BaseApiTest {
         Assert.assertTrue(actual_case.getTitle().equals(expected_cases.getTitle()));
     }
 
-    @Test(dependsOnMethods = "updateCaseTest")
+    @Test(dependsOnMethods = "updateCaseTest",alwaysRun = true)
     public void deleteCasesTest() {
-        System.out.println(currentSection.getSuit_id());
-        System.out.println(currentSection.getId());
+
         int suitId = new SectionAdapter().getSuitID(currentSection.getSuit_id());
-        System.out.println(suitId);
 
         Response response = new CasesAdapter().deleteCases(project.getId(), suitId);
     }
-    @Test(dependsOnMethods = "updateCaseTest")
-  //  @Test(dependsOnMethods = "deleteCasesTest")
+
+    @Test(dependsOnMethods = "deleteCasesTest", alwaysRun = true)
     public void deleteProject(){
         new ProjectsAdapter().delete(project.getId());
     }

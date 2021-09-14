@@ -48,7 +48,7 @@ public class SmokeTests extends BaseTest {
         Assert.assertTrue(addEditTestCasePage.getAddTestCaseButton().isEnabled());
     }
 
-    @Test(dependsOnMethods = "positiveEditTestCaseTest",alwaysRun = true)
+    @Test(dependsOnMethods = "positiveEditTestCaseTest", alwaysRun = true)
 
     public void positiveDeleteProjectTest() {
         AdministrationProjectsPage adminPage = new LoginPage(browsersService, true)

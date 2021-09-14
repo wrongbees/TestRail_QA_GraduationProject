@@ -38,7 +38,7 @@ public class AddEditTestCasePage extends BasePage {
     @Override
     public boolean isPageOpened() {
         try {
-            return getTestCaseTitleInput().isDisplayed();
+            return getCancelButton().isEnabled();
         } catch (NoSuchElementException ex) {
             return false;
         }
