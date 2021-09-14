@@ -28,7 +28,7 @@ public class SmokeTests extends BaseTest {
     }
 
     @Test(dependsOnMethods = "positiveAddProjectTest")
-    public void positiveEditTestCaseTest() throws AWTException {
+    public void positiveEditTestCaseTest() throws AWTException, InterruptedException {
         cases = ModelsFactory.getCases();
 
         AddEditTestCasePage addEditTestCasePage = new LoginPage(browsersService, true)
