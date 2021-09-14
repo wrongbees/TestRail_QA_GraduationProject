@@ -1,0 +1,36 @@
+version: 2
+
+# Define the jobs we want to run for this project
+jobs:
+  build:
+    docker:
+      - image: 'circleci/openjdk:latest-browsers'
+
+    working_directory: ~/repo
+    environment:
+    # get from git and get maven dependencies
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "pom.xml" }}
+            - v1-dependencies-
+      - run: mvn dependency:go-offline
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: v1-dependencies-{{ checksum "pom.xml" }}
+
+      # run tests!
+      - run:
+          name: Running tests
+          command: mvn clean install
+      - run:
+          name: Generate allure report
+          command: mvn allure:report
+          when: always
+      - store_test_results:
+          path: target/surefire-reports/junitreports
+          when: always
+      - store_artifacts:
+          path: target/site/allure-maven-plugin/
