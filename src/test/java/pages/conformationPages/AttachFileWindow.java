@@ -3,6 +3,7 @@ package pages.conformationPages;
 import baseEntities.BasePage;
 import core.BrowsersService;
 import executors.RobotExecutor;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -72,20 +73,21 @@ public class AttachFileWindow extends BasePage {
         getDeleteButton().click();
     }
 
+    @Step("Click Attach Button and return to the Add Test Case Page")
     public AddEditTestCasePage clickAttachButton() {
         getAttachButton().click();
         return new AddEditTestCasePage(browsersService, false);
     }
 
     /***
-     *  метод запускает робота для загрузки файла, и ждет 10 сек. пока не появится кнопка
+     *  метод запускает робота для загрузки файла, и ждет 20 сек. пока не появится кнопка
      *                            DELETE
      */
 
+    @Step("Click on the button Add New, upload file {fileName}")
     public AttachFileWindow downloadFile(String fileName) throws AWTException, InterruptedException {
-        Thread.sleep(5500);
+        Thread.sleep(5000);
         clickAddNewButton();
-        System.out.println("******************Вызываем робота*****************");
         RobotExecutor.downloadFile(fileName);
         int timeOut = 0;
         boolean isEnable = false;

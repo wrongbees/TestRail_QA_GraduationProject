@@ -3,6 +3,7 @@ package pages;
 import baseEntities.BasePage;
 import core.BrowsersService;
 import core.ReadProperties;
+import io.qameta.allure.Step;
 import models.Cases;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
@@ -63,9 +64,11 @@ public class AddEditTestCasePage extends BasePage {
     private Button getEntityAttachmentEmptyField() {
         return new Button(browsersService, ENTITY_ATTACHMENT_LIST_EMPTY_ICON);
     }
+
     private Button getEntityAttachmentAddField() {
         return new Button(browsersService, ENTITY_ATTACHMENT_LIST_ADD);
     }
+
     public Button getCancelButton() {
         return new Button(browsersService, CANCEL_BUTTON);
     }
@@ -84,24 +87,20 @@ public class AddEditTestCasePage extends BasePage {
         return this;
     }
 
-    private AddEditTestCasePage inputReferenceField(String caseTitle) {//
-        getReferenceInputField()                                   //Нужен ли нам этот метод????
-                .sendKeys(caseTitle);                              //
+    private AddEditTestCasePage inputReferenceField(String caseTitle) {
+        getReferenceInputField()
+                .sendKeys(caseTitle);
         return this;
     }
 
-    /***
-     *
-     * этот метод возможно не мой
-     */
     public SomeTestCasePage clickAddTestCaseButton() {
         getAddTestCaseButton()
                 .click();
         return new SomeTestCasePage(browsersService, false);
     }
 
-    public void clickAddTestCaseButtonWithoutReturn() {//
-        getAddTestCaseButton()                         // Это нам нужно?
+    public void clickAddTestCaseButtonWithoutReturn() {
+        getAddTestCaseButton()
                 .click();
     }
 
@@ -112,11 +111,7 @@ public class AddEditTestCasePage extends BasePage {
         return new SomeTestCasePage(browsersService, false);
     }
 
-    /***
-     * Добавил метод который должен принимать Cases case
-     *
-     *
-     */
+    @Step("Fill test case attributes with random values")
     public AddEditTestCasePage addTestCase(Cases someCase) {
         if (someCase.getTitle() != null) {
             inputTestCaseTitle(someCase.getTitle());
@@ -133,16 +128,19 @@ public class AddEditTestCasePage extends BasePage {
         return this;
     }
 
+    @Step("Click on the download button for the Test Case and open the file download window")
     public AttachFileWindow clickEntityAttachmentFieldButton() {
         try {
             getEntityAttachmentEmptyField().click();
-        }catch (ElementNotInteractableException ex){
+        } catch (ElementNotInteractableException ex) {
             getEntityAttachmentAddField().click();
         }
         return new AttachFileWindow(browsersService);
     }
 
-    //!!!!!!!!!!!!!!!!!!! метод возвращает имя файл обрезая фразу (Click and hold to enter delete mode)
+    /**
+     * Метод возвращает имя файл обрезая фразу (Click and hold to enter delete mode)
+     */
     public String getFirstFileName() {
         return getFirstFileInAttachmentList().getAttribute("title")
                 .replace("(Click and hold to enter delete mode)", "").trim();

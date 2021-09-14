@@ -2,6 +2,7 @@ package pages.baseHeaderPage;
 
 import baseEntities.BasePage;
 import core.BrowsersService;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -45,24 +46,25 @@ public class HeaderDashboard extends BasePage {
         return new Button(browsersService, ADMINISTRATION_BUTTON);
     }
 
-    private Button getDashboardTestCaseButton(){
-        return new Button(browsersService,DASHBOARD_TEST_CASE_TITLE);
+    private Button getDashboardTestCaseButton() {
+        return new Button(browsersService, DASHBOARD_TEST_CASE_TITLE);
     }
 
-    public AdministrationSidebar clickAdministrationButton(){
+    public AdministrationSidebar clickAdministrationButton() {
         getAdministrationButton().click();
-        return new AdministrationSidebar(browsersService,false);
+        return new AdministrationSidebar(browsersService, false);
     }
 
-    public DashboardPage clickReturnDashboardPageButton(){
+    public DashboardPage clickReturnDashboardPageButton() {
         getReturnDashboardButton()
                 .click();
-        return new DashboardPage(browsersService,false);
+        return new DashboardPage(browsersService, false);
     }
 
-    public TestCasesPage clickDashboardTestCaseButton(){
+    @Step("Go to the Test case tab")
+    public TestCasesPage clickDashboardTestCaseButton() {
         getDashboardTestCaseButton()
                 .click();
-        return new TestCasesPage(browsersService,false);
+        return new TestCasesPage(browsersService, false);
     }
 }

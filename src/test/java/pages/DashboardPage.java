@@ -2,6 +2,7 @@ package pages;
 
 import core.BrowsersService;
 import core.ReadProperties;
+import io.qameta.allure.Step;
 import models.Project;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -69,6 +70,7 @@ public class DashboardPage extends HeaderDashboard {
         return browsersService.getWaiters().waitForVisibility(TITLE_POPUP_MESSAGE);
     }
 
+    @Step("Click on the button Add Project and go to the page Add Project Page")
     public AddProjectPage clickAddProjectButton() {
         getAddProjectButton()
                 .click();
@@ -81,7 +83,10 @@ public class DashboardPage extends HeaderDashboard {
         return new SomeProjectPage(browsersService, false);
     }
 
-    //**************нажимаем на название проекта в таблице
+    /**
+     * Нажимаем на название проекта в таблице
+     */
+    @Step("Go to the page of the project")
     public SomeProjectPage clickProjectLink(Project project) {
 
         for (WebElement element : getProjectList()) {
@@ -94,9 +99,8 @@ public class DashboardPage extends HeaderDashboard {
     }
 
     /***
-     * Оставляем это или нет?
+     * Метод поиска в таблице проекта
      */
-//********************метод поиска в таблице проекта
     public boolean presentInTheTable(Project project) {
         if (project == null) {
             return false;
@@ -109,7 +113,6 @@ public class DashboardPage extends HeaderDashboard {
                 }
             }
         } catch (NoSuchElementException e) {
-            //logger.info("Project table is empty")
         }
         return false;
     }

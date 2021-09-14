@@ -3,6 +3,7 @@ package pages;
 import baseEntities.BasePage;
 import core.BrowsersService;
 import core.ReadProperties;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -78,6 +79,7 @@ public class LoginPage extends BasePage {
         return getIncorrectLoginMessage().getText();
     }
 
+    @Step("Login with correct attributes")
     public DashboardPage successfulLogin() {
         inputEmail(ReadProperties.getInstance().getUsername())
                 .inputPasswordField(ReadProperties.getInstance().getPassword())

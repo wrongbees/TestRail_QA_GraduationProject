@@ -3,6 +3,7 @@ package pages;
 import baseEntities.BasePage;
 import core.BrowsersService;
 import core.ReadProperties;
+import io.qameta.allure.Step;
 import models.Project;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -90,6 +91,8 @@ public class AddProjectPage extends BasePage {
                 .click();
     }
 
+    @Step("Fill the project attributes with random values, " +
+            "click on the button Add Project and go to the Administration Page")
     public AdministrationProjectsPage addProject(Project project){
         inputNameProject(project.getName());
         inputAnnouncementProjectInput(project.getAnnouncement());
@@ -97,7 +100,6 @@ public class AddProjectPage extends BasePage {
         setRadioButtonAddProject(project.getSuite_mode());
         clickAddProjectButton();
         return new AdministrationProjectsPage(browsersService,false);
-
     }
 
 }

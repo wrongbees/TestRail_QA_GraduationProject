@@ -16,7 +16,7 @@ public class SmokeTests extends BaseTest {
     Project project;
     Cases cases;
 
-    @Test
+    @Test (description = "Positive test for adding a project using random values")
     public void positiveAddProjectTest() {
         this.project = ModelsFactory.getProject();
         AdministrationProjectsPage adminPage = new LoginPage(browsersService, true)
@@ -27,7 +27,8 @@ public class SmokeTests extends BaseTest {
         Assert.assertTrue(adminPage.projectIsFound(project));
     }
 
-    @Test(dependsOnMethods = "positiveAddProjectTest")
+    @Test(description = "Positive test for editing a test case by uploading a second file",
+            dependsOnMethods = "positiveAddProjectTest")
     public void positiveEditTestCaseTest() throws AWTException, InterruptedException {
         cases = ModelsFactory.getCases();
 
@@ -40,7 +41,7 @@ public class SmokeTests extends BaseTest {
                 .clickEntityAttachmentFieldButton()
                 .downloadFile("StartTest.xml")
                 .clickAttachButton()
-                .clickAddTestCaseButton()
+                .clickAddTestCaseButton()//остановилась здесь
                 .clickEditTestCaseButton()
                 .clickEntityAttachmentFieldButton()
                 .downloadFile("pooh.jpg")
