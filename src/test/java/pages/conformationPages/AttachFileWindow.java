@@ -84,6 +84,7 @@ public class AttachFileWindow extends BasePage {
 
     public AttachFileWindow downloadFile(String fileName) throws AWTException {
         clickAddNewButton();
+        System.out.println("******************Вызываем робота*****************");
         RobotExecutor.downloadFile(fileName);
         int timeOut = 0;
         boolean isEnable = false;

@@ -10,6 +10,7 @@ public class RobotExecutor {
 
 
     public static void downloadFile(String fileName) throws AWTException {
+        System.out.println("******************Робот включился*****************");
         Robot robot = new Robot();;
         ClassLoader classLoader;
         File file;
@@ -35,5 +36,7 @@ public class RobotExecutor {
 
         robot.keyPress(KeyEvent.VK_ENTER);
         robot.keyRelease(KeyEvent.VK_ENTER);
+
+        System.out.println("******************робот выключился*****************");
     }
 }
