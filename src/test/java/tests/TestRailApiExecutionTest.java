@@ -12,6 +12,7 @@ import models.Section;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,6 @@ public class TestRailApiExecutionTest extends BaseApiTest {
     Section currentSection;
 
     List<Cases> actualCaseslist = new ArrayList<>();
-
 
     @Test
     public void addCasesTest() {
@@ -48,61 +48,38 @@ public class TestRailApiExecutionTest extends BaseApiTest {
     }
 
     @Test(dependsOnMethods = "getCasesTest")
+    public void negativeGetCasesTest() {
+        Cases actualCases = ModelsFactory.getCases();
+        new CasesAdapter().getFailed(actualCases);
+
+    }
+
+    @Test(dependsOnMethods = "negativeGetCasesTest")
     public void getHistoryForCases() {
         Cases actualCases = actualCaseslist.get(0);
-        Response response = new CasesAdapter().getHistory(actualCases);
+        new CasesAdapter().getHistory(actualCases);
     }
 
     @Test(dependsOnMethods = "getHistoryForCases")
-    public void getHistoryForCasesFailedTest() {
+    public void negativeGetHistoryForCasesTest() {
         Cases actualCases = ModelsFactory.getCases();
-        Response response = new CasesAdapter().getHistory(actualCases);
+        new CasesAdapter().getHistoryFailed(actualCases);
     }
 
-
-//   // @Test(dependsOnMethods = "getHistoryForCases",alwaysRun = true)
-//    @Test(dependsOnMethods = "getHistoryForCasesFailedTest", alwaysRun = true)
-//    public void copyCasesToSectionTest() {
-//        Section sectionModels = ModelsFactory.getSection();
-//
-//        Section newSection = new SectionAdapter().add(sectionModels, project.getId());
-//
-//        String case_ids = "";
-//        for (Cases item : actualCaseslist)
-//            case_ids = case_ids + ", " + item.getId();
-//        String caseIds = case_ids.substring(2);
-//        System.out.println(caseIds);
-//
-//        new CasesAdapter().copy(newSection.getId(), caseIds);
-//    }
-
-
-
-    @Test(dependsOnMethods = "getHistoryForCases",alwaysRun = true)
-
+    @Test(dependsOnMethods = "negativeGetHistoryForCasesTest")
     public void updateCaseTest() {
         Cases expected_cases = Cases.builder()
                 .title("TITLE №00")
                 .refs("Какое то обновленное поле...")
                 .build();
 
-
         Cases actual_case = new CasesAdapter().updateCase(actualCaseslist.get(0).getId(), expected_cases);
         Assert.assertTrue(actual_case.getTitle().equals(expected_cases.getTitle()));
     }
 
-    @Test(dependsOnMethods = "updateCaseTest",alwaysRun = true)
-    public void deleteCasesTest() {
-
-        int suitId = new SectionAdapter().getSuitID(currentSection.getSuit_id());
-
-        Response response = new CasesAdapter().deleteCases(project.getId(), suitId);
-    }
-
-    @Test(dependsOnMethods = "deleteCasesTest", alwaysRun = true)
+    @Test(dependsOnMethods = "updateCaseTest")
     public void deleteProject(){
         new ProjectsAdapter().delete(project.getId());
     }
-
 }
 

@@ -31,7 +31,7 @@ public class SectionAdapter extends BaseAdapter {
                 .then()
                 .log().body()
                 .log().status()
-                .statusCode(HttpStatus.SC_OK)
+                .statusCode(HttpStatus.SC_BAD_REQUEST)
                 .extract().jsonPath().get("suite_id");
 
     }

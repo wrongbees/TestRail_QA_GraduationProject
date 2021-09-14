@@ -38,6 +38,18 @@ public class CasesAdapter extends BaseAdapter {
         return gson.fromJson(response.asString().trim(), Cases.class);
     }
 
+    public Cases getFailed(Cases cases) {
+        Response response = given()
+                .when()
+                .get(String.format(CasesEndpoint.GET_CASE, cases.getId()))
+                .then()
+                .log().body()
+                .log().status()
+                .statusCode(HttpStatus.SC_BAD_REQUEST)
+                .extract().response();
+        return gson.fromJson(response.asString().trim(), Cases.class);
+    }
+
     public Response getHistory(Cases cases) {
         return given()
                 .when()
@@ -50,46 +62,16 @@ public class CasesAdapter extends BaseAdapter {
 
     }
 
-    public List<Cases> getAll(int projectId, int suitId) {
-        Response response = given()
+    public Response getHistoryFailed(Cases cases) {
+        return given()
                 .when()
-                .get(String.format(CasesEndpoint.GET_CASE, projectId,suitId))
+                .get(String.format(CasesEndpoint.GET_HISTORY_FOR_CASES, cases.getId()))
                 .then()
                 .log().body()
                 .log().status()
-                .statusCode(HttpStatus.SC_OK)
-                .extract().response();
-        return (List<Cases>) gson.fromJson(response.asString().trim(), new TypeToken<List<Cases>>(){}.getType());
-    }
-
-    public Response copy( int sectionId, String case_ids) {
-        Response response = given()
-                .body(String.format("{ \n" +
-                        "  \"case_ids\": \"%s\"\n" +
-                        "}",case_ids))
-                .when()
-                .post(String.format(CasesEndpoint.COPY_CASES, sectionId))
-                .then()
-                .log().body()
-                .log().status()
-                .statusCode(HttpStatus.SC_OK)
+                .statusCode(HttpStatus.SC_BAD_REQUEST)
                 .extract().response();
 
-        return response;
-    }
-
-    public Response updateCases(int suitId, String jsonBody){
-        Response response = given()
-                .body(jsonBody)
-                .when()
-                .post(String.format(CasesEndpoint.UPDATE_CASES, suitId))
-                .then()
-                .log().body()
-                .log().status()
-                .statusCode(HttpStatus.SC_OK)
-                .extract().response();
-
-        return response;
     }
 
     public Cases updateCase(int caseId, Cases cases){
