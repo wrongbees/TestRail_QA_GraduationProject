@@ -41,7 +41,7 @@ public class RegressionTests extends BaseTest {
     }
 
     @Test(dependsOnMethods = "positivePopUpMessageTest")
-    public void positiveUploadingFileTest() throws AWTException {
+    public void positiveUploadingFileTest() throws AWTException, InterruptedException {
         this.project = ModelsFactory.getProject();
         AddEditTestCasePage addTestCasePage = new LoginPage(browsersService, true)
                 .successfulLogin()
