@@ -70,10 +70,9 @@ public class AddEditTestCasePage extends BasePage {
         return new Button(browsersService, CANCEL_BUTTON);
     }
 
-    public WebElement getAddTestCaseButton(){ return browsersService.getWaiters().waitForClickable(ADD_TEST_CASE_BUTTON);}
-//    public Button getAddTestCaseButton() {
-//        return new Button(browsersService, ADD_TEST_CASE_BUTTON);
-//    }
+    public Button getAddTestCaseButton() {
+        return new Button(browsersService, ADD_TEST_CASE_BUTTON);
+    }
 
     public WebElement getTestCaseErrorLabel() {
         return browsersService.getWaiters().waitForVisibility(TEST_CASE_ERROR_LABEL);
