@@ -71,7 +71,7 @@ public class RegressionTests extends BaseTest {
         Assert.assertEquals(someTestCasePage.getTestCaseName().getText(), newGeneratedString);
     }
 
-    @Test(dependsOnMethods = "positiveUploadingFileTest")
+    @Test(dependsOnMethods = "positiveBoundaryValuesTest")
     public void negativeNullBoundaryValueTest() {
         AddEditTestCasePage addTestCasePage = new LoginPage(browsersService, true)
                 .successfulLogin()
@@ -84,7 +84,7 @@ public class RegressionTests extends BaseTest {
                 "Field Title is a required field.");
     }
 
-    @Test(dependsOnMethods = "positiveUploadingFileTest",
+    @Test(dependsOnMethods = "negativeNullBoundaryValueTest",
             dataProvider = "NegativeBoundaryInputFiledValue",
             dataProviderClass = DataProvider.class)
     public void negativeBoundaryValuesTest(int numberOfValuesInputFiled) {
@@ -102,7 +102,7 @@ public class RegressionTests extends BaseTest {
         Assert.assertEquals(actualResult, expectedResult);
     }
 
-    @Test(dependsOnMethods = "positiveUploadingFileTest")
+    @Test(dependsOnMethods = "negativeBoundaryValuesTest")
     public void positiveDialogBoxDisplayTest() {
         ConfirmationDeleteWindow deleteWindow = new LoginPage(browsersService, true)
                 .successfulLogin()

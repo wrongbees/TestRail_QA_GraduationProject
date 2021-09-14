@@ -26,7 +26,6 @@ public class SmokeTests extends BaseTest {
     }
 
     @Test(dependsOnMethods = "positiveAddProjectTest")
-
     public void positiveEditTestCaseTest() {
         cases = ModelsFactory.getCases();
 
