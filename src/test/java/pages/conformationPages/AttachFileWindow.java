@@ -89,7 +89,7 @@ public class AttachFileWindow extends BasePage {
         int timeOut = 0;
         boolean isEnable = false;
 
-        while (timeOut < 10 & !isEnable) {
+        while (timeOut < 20 & !isEnable) {
             try {
 
                 isEnable = getDeleteButton().isDisplayed();
