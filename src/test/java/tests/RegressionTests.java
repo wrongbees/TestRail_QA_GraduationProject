@@ -10,6 +10,8 @@ import pages.*;
 import pages.conformationPages.ConfirmationDeleteWindow;
 import pages.AddEditTestCasePage;
 
+import java.awt.*;
+
 public class RegressionTests extends BaseTest {
     Project project;
 
@@ -39,7 +41,7 @@ public class RegressionTests extends BaseTest {
     }
 
     @Test(dependsOnMethods = "positivePopUpMessageTest")
-    public void positiveUploadingFileTest() {
+    public void positiveUploadingFileTest() throws AWTException {
         this.project = ModelsFactory.getProject();
         AddEditTestCasePage addTestCasePage = new LoginPage(browsersService, true)
                 .successfulLogin()

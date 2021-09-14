@@ -9,6 +9,8 @@ import org.openqa.selenium.WebElement;
 import pages.AddEditTestCasePage;
 import wrappers.Button;
 
+import java.awt.*;
+
 public class AttachFileWindow extends BasePage {
 
     private final static By WINDOW_TITLE = By.id("ui-dialog-title-attachmentNewDialogFile");
@@ -80,7 +82,7 @@ public class AttachFileWindow extends BasePage {
      *                            DELETE
      */
 
-    public AttachFileWindow downloadFile(String fileName) {
+    public AttachFileWindow downloadFile(String fileName) throws AWTException {
         clickAddNewButton();
         RobotExecutor.downloadFile(fileName);
         int timeOut = 0;

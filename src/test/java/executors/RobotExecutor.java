@@ -8,20 +8,13 @@ import java.util.Objects;
 
 public class RobotExecutor {
 
-    static {
-        try {
-            robot = new Robot();
-        } catch (AWTException e) {
-            e.printStackTrace();
-        }
-    }
 
-    private static Robot robot;
-    private static ClassLoader classLoader;
-    private static File file;
-    private static StringSelection stringSelection;
+    public static void downloadFile(String fileName) throws AWTException {
+        Robot robot = new Robot();;
+        ClassLoader classLoader;
+        File file;
+        StringSelection stringSelection;
 
-    public static void downloadFile(String fileName) {
 
         classLoader = RobotExecutor.class.getClassLoader();
 

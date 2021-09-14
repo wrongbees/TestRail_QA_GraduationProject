@@ -10,6 +10,8 @@ import pages.AddEditTestCasePage;
 import pages.AdministrationProjectsPage;
 import pages.LoginPage;
 
+import java.awt.*;
+
 public class SmokeTests extends BaseTest {
     Project project;
     Cases cases;
@@ -26,7 +28,7 @@ public class SmokeTests extends BaseTest {
     }
 
     @Test(dependsOnMethods = "positiveAddProjectTest")
-    public void positiveEditTestCaseTest() {
+    public void positiveEditTestCaseTest() throws AWTException {
         cases = ModelsFactory.getCases();
 
         AddEditTestCasePage addEditTestCasePage = new LoginPage(browsersService, true)
