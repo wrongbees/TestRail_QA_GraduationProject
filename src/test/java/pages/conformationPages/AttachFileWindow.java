@@ -83,7 +83,7 @@ public class AttachFileWindow extends BasePage {
      */
 
     public AttachFileWindow downloadFile(String fileName) throws AWTException, InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(5500);
         clickAddNewButton();
         System.out.println("******************Вызываем робота*****************");
         RobotExecutor.downloadFile(fileName);
