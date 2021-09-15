@@ -61,7 +61,7 @@ public class AttachFileWindow extends BasePage {
         return new Button(browsersService, DELETE_BUTTON);
     }
 
-    private AttachFileWindow clickAddNewButton() {
+    public AttachFileWindow clickAddNewButton() {
         getAddNewButton().click();
         return this;
     }
@@ -93,6 +93,25 @@ public class AttachFileWindow extends BasePage {
         Thread.sleep(5000);
         clickAddNewButton();
         RobotExecutor.downloadFile(fileName);
+        int timeOut = 0;
+        boolean isEnable = false;
+
+        while (timeOut < 20 & !isEnable) {
+            try {
+
+                isEnable = getDeleteButton().isDisplayed();
+
+            } catch (NoSuchElementException e) {e.printStackTrace();}
+            browsersService.sleep(1000);
+            timeOut++;
+        }
+        return this;
+    }
+    @Step("Click on the button Add New, upload file {fileName}")
+    public AttachFileWindow downloadFile() throws AWTException, InterruptedException {
+      //  Thread.sleep(5000);
+    //    clickAddNewButton();
+//        RobotExecutor.downloadFile(fileName);
         int timeOut = 0;
         boolean isEnable = false;
 
