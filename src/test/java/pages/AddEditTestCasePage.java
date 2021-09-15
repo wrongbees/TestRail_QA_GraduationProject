@@ -47,7 +47,7 @@ public class AddEditTestCasePage extends BasePage {
     }
 
     private WebElement getFirstFileInAttachmentList() {
-        return browsersService.getWaiters().waitForVisibility(FIRST_FILE_IN_ATTACHMENT_LIST);
+        return browsersService.getWaiters().presenceOfElementLocated(FIRST_FILE_IN_ATTACHMENT_LIST);
     }
 
     private InputField getTestCaseTitleInput() {
@@ -70,8 +70,8 @@ public class AddEditTestCasePage extends BasePage {
         return new Button(browsersService, CANCEL_BUTTON);
     }
 
-    public Button getAddTestCaseButton() {
-        return new Button(browsersService,ADD_TEST_CASE_BUTTON);
+    public WebElement getAddTestCaseButton() {
+        return browsersService.getDriver().findElement(ADD_TEST_CASE_BUTTON);
     }
 
     public WebElement getTestCaseErrorLabel() {
@@ -91,8 +91,9 @@ public class AddEditTestCasePage extends BasePage {
     }
 
     public SomeTestCasePage clickAddTestCaseButton() {
-        getAddTestCaseButton()
-                .click();
+        ((JavascriptExecutor) browsersService.getDriver()).executeScript("arguments[0].click();",  getAddTestCaseButton());
+//        getAddTestCaseButton()
+//                .click();
         return new SomeTestCasePage(browsersService, false);
     }
 

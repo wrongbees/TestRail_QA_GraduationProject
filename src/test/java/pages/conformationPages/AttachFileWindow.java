@@ -49,8 +49,8 @@ public class AttachFileWindow extends BasePage {
         return new Button(browsersService, ADD_NEW_BUTTON);
     }
 
-    private Button getAttachButton() {
-        return new Button(browsersService,ATTACH_BUTTON);
+    private WebElement getAttachButton() {
+        return browsersService.getWaiters().waitForVisibility(ATTACH_BUTTON);
     }
 
     private Button getCancelButton() {
@@ -76,7 +76,8 @@ public class AttachFileWindow extends BasePage {
 
     @Step("Click Attach Button and return to the Add Test Case Page")
     public AddEditTestCasePage clickAttachButton() throws InterruptedException {
-        getAttachButton().click();
+   //     getAttachButton().click();
+        ((JavascriptExecutor) browsersService.getDriver()).executeScript("arguments[0].click();",  getAttachButton());
         Thread.sleep(2000);
         ((JavascriptExecutor) browsersService.getDriver()).executeScript("window.scrollTo(0, document.body.scrollHeight)");
         return new AddEditTestCasePage(browsersService, false);
