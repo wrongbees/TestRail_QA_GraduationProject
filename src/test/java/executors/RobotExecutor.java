@@ -21,7 +21,7 @@ public class RobotExecutor {
         file = new File(Objects.requireNonNull(classLoader.getResource(fileName)).getFile());
 
         String absolutePath = file.getAbsolutePath();
-
+        System.out.println(absolutePath);
         stringSelection = new StringSelection(absolutePath);
 
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
