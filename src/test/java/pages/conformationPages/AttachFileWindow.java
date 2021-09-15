@@ -5,6 +5,7 @@ import core.BrowsersService;
 import executors.RobotExecutor;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import pages.AddEditTestCasePage;
@@ -49,7 +50,7 @@ public class AttachFileWindow extends BasePage {
     }
 
     private Button getAttachButton() {
-        return new Button(browsersService, ATTACH_BUTTON);
+        return new Button(browsersService,ATTACH_BUTTON);
     }
 
     private Button getCancelButton() {
@@ -74,8 +75,10 @@ public class AttachFileWindow extends BasePage {
     }
 
     @Step("Click Attach Button and return to the Add Test Case Page")
-    public AddEditTestCasePage clickAttachButton() {
+    public AddEditTestCasePage clickAttachButton() throws InterruptedException {
         getAttachButton().click();
+        Thread.sleep(2000);
+        ((JavascriptExecutor) browsersService.getDriver()).executeScript("window.scrollTo(0, document.body.scrollHeight)");
         return new AddEditTestCasePage(browsersService, false);
     }
 

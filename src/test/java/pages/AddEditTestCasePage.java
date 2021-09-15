@@ -5,10 +5,7 @@ import core.BrowsersService;
 import core.ReadProperties;
 import io.qameta.allure.Step;
 import models.Cases;
-import org.openqa.selenium.By;
-import org.openqa.selenium.ElementNotInteractableException;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import pages.conformationPages.AttachFileWindow;
 import wrappers.Button;
 import wrappers.InputField;
@@ -74,16 +71,16 @@ public class AddEditTestCasePage extends BasePage {
     }
 
     public Button getAddTestCaseButton() {
-        return new Button(browsersService, ADD_TEST_CASE_BUTTON);
+        return new Button(browsersService,ADD_TEST_CASE_BUTTON);
     }
 
     public WebElement getTestCaseErrorLabel() {
         return browsersService.getWaiters().waitForVisibility(TEST_CASE_ERROR_LABEL);
     }
 
-    private AddEditTestCasePage inputTestCaseTitle(String testCaseTitle) {//
-        getTestCaseTitleInput()                                       //ужен ли нам этот метод???
-                .sendKeys(testCaseTitle);                             //
+    private AddEditTestCasePage inputTestCaseTitle(String testCaseTitle) {
+        getTestCaseTitleInput()
+                .sendKeys(testCaseTitle);
         return this;
     }
 
@@ -145,4 +142,8 @@ public class AddEditTestCasePage extends BasePage {
         return getFirstFileInAttachmentList().getAttribute("title")
                 .replace("(Click and hold to enter delete mode)", "").trim();
     }
+//    public AddEditTestCasePage scrollIntoViewButtonSave(){
+//        ((JavascriptExecutor) browsersService.getDriver()).executeScript("window.scrollTo(0, document.body.scrollHeight)");
+//    return new AddEditTestCasePage(browsersService,false);
+//    }
 }

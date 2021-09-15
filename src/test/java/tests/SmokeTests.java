@@ -1,6 +1,7 @@
 package tests;
 
 import baseEntities.BaseTest;
+import io.qameta.allure.Description;
 import models.Cases;
 import models.ModelsFactory;
 import models.Project;
@@ -16,7 +17,8 @@ public class SmokeTests extends BaseTest {
     Project project;
     Cases cases;
 
-    @Test (description = "Positive test for adding a project using random values")
+    @Description("Positive test for adding a project using random values")
+    @Test
     public void positiveAddProjectTest() {
         this.project = ModelsFactory.getProject();
         AdministrationProjectsPage adminPage = new LoginPage(browsersService, true)
@@ -27,8 +29,8 @@ public class SmokeTests extends BaseTest {
         Assert.assertTrue(adminPage.projectIsFound(project));
     }
 
-    @Test(description = "Positive test for editing a test case by uploading a second file",
-            dependsOnMethods = "positiveAddProjectTest")
+    @Description("Positive test for editing a test case by uploading a second file")
+    @Test(dependsOnMethods = "positiveAddProjectTest")
     public void positiveEditTestCaseTest() throws AWTException, InterruptedException {
         cases = ModelsFactory.getCases();
 
@@ -50,8 +52,8 @@ public class SmokeTests extends BaseTest {
         Assert.assertTrue(addEditTestCasePage.getAddTestCaseButton().isEnabled());
     }
 
+    @Description("Positive test for deleting a project")
     @Test(dependsOnMethods = "positiveEditTestCaseTest", alwaysRun = true)
-
     public void positiveDeleteProjectTest() {
         AdministrationProjectsPage adminPage = new LoginPage(browsersService, true)
                 .successfulLogin()
