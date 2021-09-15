@@ -13,7 +13,7 @@ import pages.AddEditTestCasePage;
 import java.awt.*;
 
 public class RegressionTests extends BaseUITest {
-    //Project project;
+    Project project;
 
     @Test
     public void negativeLoginTest(){
@@ -40,8 +40,27 @@ public class RegressionTests extends BaseUITest {
         Assert.assertEquals(dashboardPage.getPopUpMessageTitleText(), "Compact View");
     }
 
-    @Test(dependsOnMethods = "positivePopUpMessageTest")
-    public void positiveUploadingFileTest() throws AWTException, InterruptedException {
+//    @Test(dependsOnMethods = "positivePopUpMessageTest")
+//    public void positiveUploadingFileTest() throws AWTException, InterruptedException {
+//        this.project = ModelsFactory.getProject();
+//        AddEditTestCasePage addTestCasePage = new LoginPage(browsersService, true)
+//                .successfulLogin()
+//                .clickAddProjectButton()
+//                .addProject(project)
+//                .clickReturnDashboardPageButton()
+//                .clickProjectLink(project)
+//                .clickDashboardTestCaseButton()
+//                .clickAddTestCaseButton()
+//                .addTestCase(ModelsFactory.getCases())
+//                .clickEntityAttachmentFieldButton()
+//                .downloadFile("config.properties")
+//                .clickAttachButton();
+//
+//        Assert.assertEquals(addTestCasePage.getFirstFileName(), "config.properties");
+//    }
+
+        @Test(dependsOnMethods = "negativeSafetyTest")
+    public void negativeNullBoundaryValueTest() {
         this.project = ModelsFactory.getProject();
         AddEditTestCasePage addTestCasePage = new LoginPage(browsersService, true)
                 .successfulLogin()
@@ -51,15 +70,13 @@ public class RegressionTests extends BaseUITest {
                 .clickProjectLink(project)
                 .clickDashboardTestCaseButton()
                 .clickAddTestCaseButton()
-                .addTestCase(ModelsFactory.getCases())
-                .clickEntityAttachmentFieldButton()
-                .downloadFile("config.properties")
-                .clickAttachButton();
+                .unsuccessfullyAddTestCase("");
 
-        Assert.assertEquals(addTestCasePage.getFirstFileName(), "config.properties");
+        Assert.assertEquals(addTestCasePage.getTestCaseErrorLabel().getText(),
+                "Field Title is a required field.");
     }
 
-    @Test(dependsOnMethods = "positiveUploadingFileTest",
+    @Test(dependsOnMethods = "negativeNullBoundaryValueTest",
             dataProvider = "BoundaryInputFiledValue",
             dataProviderClass = DataProvider.class,alwaysRun = true)
     public void positiveBoundaryValuesTest(int numberOfValuesInputFiled) {
@@ -71,19 +88,6 @@ public class RegressionTests extends BaseUITest {
                 .clickAddTestCaseButton()
                 .successfullyAddTestCase(newGeneratedString);
         Assert.assertEquals(someTestCasePage.getTestCaseName().getText(), newGeneratedString);
-    }
-
-    @Test(dependsOnMethods = "positiveBoundaryValuesTest")
-    public void negativeNullBoundaryValueTest() {
-        AddEditTestCasePage addTestCasePage = new LoginPage(browsersService, true)
-                .successfulLogin()
-                .clickProjectLink(project)
-                .clickDashboardTestCaseButton()
-                .clickAddTestCaseButton()
-                .unsuccessfullyAddTestCase("");
-
-        Assert.assertEquals(addTestCasePage.getTestCaseErrorLabel().getText(),
-                "Field Title is a required field.");
     }
 
     @Test(dependsOnMethods = "negativeNullBoundaryValueTest",
