@@ -46,7 +46,7 @@ public class SmokeTests extends BaseUITest {
                 .clickAddTestCaseButton()
                 .addTestCase(cases)
                 .clickEntityAttachmentFieldButton()
-                .downloadFile("StartTest.xml")
+                .downloadFile("pooh.jpg")
                 .clickAttachButton()
                 .clickAddTestCaseButton()//остановилась здесь
                 .clickEditTestCaseButton()
