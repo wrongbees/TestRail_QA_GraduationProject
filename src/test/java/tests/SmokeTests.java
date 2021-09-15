@@ -31,63 +31,64 @@ public class SmokeTests extends BaseUITest {
 //        Assert.assertTrue(adminPage.projectIsFound(project));
 //    }
 
-    @Description("Positive test for editing a test case by uploading a second file")
-    @Test//(dependsOnMethods = "positiveAddProjectTest")
-    public void positiveEditTestCaseTest() throws AWTException, InterruptedException {
-
-        cases = ModelsFactory.getCases();
-
-        AttachFileWindow window = new LoginPage(browsersService, true)
-                .successfulLogin()
-                .clickProjectLink(this.project)
-                .clickDashboardTestCaseButton()
-                .clickAddTestCaseButton()
-                .addTestCase(cases)
-                .clickEntityAttachmentFieldButton()
-                .clickAddNewButton();
-
-
-        Robot robot = new Robot();
-        robot.delay(3000);
-        StringSelection stringSelection = new StringSelection(new File("TestCase.xlsx").getAbsolutePath());
-        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
-
-        robot.keyPress(KeyEvent.VK_CONTROL);
-        robot.keyPress(KeyEvent.VK_V);
-        robot.keyRelease(KeyEvent.VK_V);
-        robot.keyRelease(KeyEvent.VK_CONTROL);
-        robot.keyPress(KeyEvent.VK_ENTER);
-        robot.keyRelease(KeyEvent.VK_ENTER);
-
-        window = window
-                .downloadFile()
-                .clickAttachButton()
-                .clickAddTestCaseButton()//остановилась здесь
-                .clickEditTestCaseButton()
-                .clickEntityAttachmentFieldButton()
-                .clickAddNewButton();
-
-        robot = new Robot();
-        robot.delay(3000);
-        stringSelection = new StringSelection(new File("pooh.jpg").getAbsolutePath());
-        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
-
-        robot.keyPress(KeyEvent.VK_CONTROL);
-        robot.keyPress(KeyEvent.VK_V);
-        robot.keyRelease(KeyEvent.VK_V);
-        robot.keyRelease(KeyEvent.VK_CONTROL);
-        robot.keyPress(KeyEvent.VK_ENTER);
-        robot.keyRelease(KeyEvent.VK_ENTER);
-
-        AddEditTestCasePage addEditTestCasePage = window
-                .downloadFile()
-                .clickAttachButton();
-
-        Assert.assertTrue(addEditTestCasePage.getAddTestCaseButton().isEnabled());
-    }
+//    @Description("Positive test for editing a test case by uploading a second file")
+//    @Test//(dependsOnMethods = "positiveAddProjectTest")
+//    public void positiveEditTestCaseTest() throws AWTException, InterruptedException {
+//
+//        cases = ModelsFactory.getCases();
+//
+//        AttachFileWindow window = new LoginPage(browsersService, true)
+//                .successfulLogin()
+//                .clickProjectLink(this.project)
+//                .clickDashboardTestCaseButton()
+//                .clickAddTestCaseButton()
+//                .addTestCase(cases)
+//                .clickEntityAttachmentFieldButton()
+//                .clickAddNewButton();
+//
+//
+//        Robot robot = new Robot();
+//        robot.delay(3000);
+//        StringSelection stringSelection = new StringSelection(new File("TestCase.xlsx").getAbsolutePath());
+//        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
+//
+//        robot.keyPress(KeyEvent.VK_CONTROL);
+//        robot.keyPress(KeyEvent.VK_V);
+//        robot.keyRelease(KeyEvent.VK_V);
+//        robot.keyRelease(KeyEvent.VK_CONTROL);
+//        robot.keyPress(KeyEvent.VK_ENTER);
+//        robot.keyRelease(KeyEvent.VK_ENTER);
+//
+//        window = window
+//                .downloadFile()
+//                .clickAttachButton()
+//                .clickAddTestCaseButton()//остановилась здесь
+//                .clickEditTestCaseButton()
+//                .clickEntityAttachmentFieldButton()
+//                .clickAddNewButton();
+//
+//        robot = new Robot();
+//        robot.delay(3000);
+//        stringSelection = new StringSelection(new File("pooh.jpg").getAbsolutePath());
+//        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
+//
+//        robot.keyPress(KeyEvent.VK_CONTROL);
+//        robot.keyPress(KeyEvent.VK_V);
+//        robot.keyRelease(KeyEvent.VK_V);
+//        robot.keyRelease(KeyEvent.VK_CONTROL);
+//        robot.keyPress(KeyEvent.VK_ENTER);
+//        robot.keyRelease(KeyEvent.VK_ENTER);
+//
+//        AddEditTestCasePage addEditTestCasePage = window
+//                .downloadFile()
+//                .clickAttachButton();
+//
+//        Assert.assertTrue(addEditTestCasePage.getAddTestCaseButton().isEnabled());
+//    }
 
     @Description("Positive test for deleting a project")
-    @Test(dependsOnMethods = "positiveEditTestCaseTest", alwaysRun = true)
+    @Test
+            //(dependsOnMethods = "positiveEditTestCaseTest", alwaysRun = true)
     public void positiveDeleteProjectTest() {
         AdministrationProjectsPage adminPage = new LoginPage(browsersService, true)
                 .successfulLogin()
