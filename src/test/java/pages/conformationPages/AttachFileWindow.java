@@ -45,8 +45,8 @@ public class AttachFileWindow extends BasePage {
         return browsersService.getDriver().findElement(WINDOW_TITLE);
     }
 
-    private Button getAddNewButton() {
-        return new Button(browsersService, ADD_NEW_BUTTON);
+    private WebElement getAddNewButton() {
+        return browsersService.getDriver().findElement(ADD_NEW_BUTTON);
     }
 
     private WebElement getAttachButton() {
@@ -62,7 +62,8 @@ public class AttachFileWindow extends BasePage {
     }
 
     public AttachFileWindow clickAddNewButton() {
-        getAddNewButton().click();
+        ((JavascriptExecutor) browsersService.getDriver()).executeScript("arguments[0].click();", getAddNewButton());
+  //      getAddNewButton().click();
         return this;
     }
 
