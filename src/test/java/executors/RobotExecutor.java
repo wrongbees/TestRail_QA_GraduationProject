@@ -9,7 +9,7 @@ import java.util.Objects;
 public class RobotExecutor {
 
     public static void downloadFile(String fileName) throws AWTException, InterruptedException {
-        System.out.println("******************Робот включился*****************");
+
         Robot robot = new Robot();
         ClassLoader classLoader;
         File file;
@@ -25,25 +25,17 @@ public class RobotExecutor {
         stringSelection = new StringSelection(absolutePath);
 
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
-        System.out.println( Toolkit.getDefaultToolkit().getSystemClipboard());
+        System.out.println(Toolkit.getDefaultToolkit().getSystemClipboard());
         robot.delay(3000);
-//        robot.keyPress(KeyEvent.VK_CONTROL);
-//        robot.keyPress(KeyEvent.VK_V);
-//        robot.keyRelease(KeyEvent.VK_V);
-//
-//        robot.keyRelease(KeyEvent.VK_CONTROL);
-//        robot.keyRelease(KeyEvent.VK_V);
-//
-//        robot.keyPress(KeyEvent.VK_ENTER);
-//       // robot.keyRelease(KeyEvent.VK_ENTER);
+
         robot.keyPress(KeyEvent.VK_CONTROL);
         robot.keyPress(KeyEvent.VK_V);
         robot.keyRelease(KeyEvent.VK_V);
         robot.keyRelease(KeyEvent.VK_CONTROL);
         robot.keyPress(KeyEvent.VK_ENTER);
         robot.keyRelease(KeyEvent.VK_ENTER);
-Thread.sleep(5000);
-        System.out.println("******************робот выключился*****************");
+        Thread.sleep(5000);
+
     }
 }
 

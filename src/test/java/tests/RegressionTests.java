@@ -13,7 +13,6 @@ import pages.AddEditTestCasePage;
 import java.awt.*;
 
 public class RegressionTests extends BaseUITest {
-    Project project;
 
     @Test
     public void negativeLoginTest(){
@@ -42,7 +41,7 @@ public class RegressionTests extends BaseUITest {
 
     @Test(dependsOnMethods = "positivePopUpMessageTest")
     public void positiveUploadingFileTest() throws AWTException, InterruptedException {
-        this.project = ModelsFactory.getProject();
+        project = ModelsFactory.getProject();
         AddEditTestCasePage addTestCasePage = new LoginPage(browsersService, true)
                 .successfulLogin()
                 .clickAddProjectButton()
@@ -61,7 +60,7 @@ public class RegressionTests extends BaseUITest {
 
         @Test(dependsOnMethods = "negativeSafetyTest")
     public void negativeNullBoundaryValueTest() {
-        this.project = ModelsFactory.getProject();
+        project = ModelsFactory.getProject();
         AddEditTestCasePage addTestCasePage = new LoginPage(browsersService, true)
                 .successfulLogin()
                 .clickAddProjectButton()

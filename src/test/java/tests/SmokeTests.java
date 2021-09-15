@@ -17,31 +17,16 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 
 public class SmokeTests extends BaseUITest {
-    //Project project;
-    // Cases cases;
-
-//    @Description("Positive test for adding a project using random values")
-//    @Test
-//    public void positiveAddProjectTest() {
-//        this.project = ModelsFactory.getProject();
-//        AdministrationProjectsPage adminPage = new LoginPage(browsersService, true)
-//                .successfulLogin()
-//                .clickAddProjectButton()
-//                .addProject(project);
-//
-//        Assert.assertTrue(adminPage.projectIsFound(project));
-//    }
 
     @Description("Positive test for editing a test case by uploading a second file")
-    @Test//(dependsOnMethods = "positiveAddProjectTest")
+    @Test
     public void positiveEditTestCaseTest() throws AWTException, InterruptedException {
 
         cases = ModelsFactory.getCases();
 
-
         AddEditTestCasePage addEditTestCasePage = new LoginPage(browsersService, true)
                 .successfulLogin()
-                .clickProjectLink(this.project)
+                .clickProjectLink(project)
                 .clickDashboardTestCaseButton()
                 .clickAddTestCaseButton()
                 .addTestCase(cases)

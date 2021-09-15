@@ -11,6 +11,6 @@ public abstract class BaseTest {
     public static Project project;
     public static Cases cases;
     public static Section currentSection;
-    public static List<Cases> actualCaseslist = new ArrayList<>();
+    public static List<Cases> actualCasesList = new ArrayList<>();
 
 }
