@@ -90,7 +90,7 @@ public class AttachFileWindow extends BasePage {
      */
 
     @Step("Click on the button Add New, upload file {fileName}")
-    public AttachFileWindow downloadFile(String fileName) throws AWTException {
+    public AttachFileWindow downloadFile(String fileName) throws AWTException, InterruptedException {
                clickAddNewButton();
         RobotExecutor.downloadFile(fileName);
         int timeOut = 0;
