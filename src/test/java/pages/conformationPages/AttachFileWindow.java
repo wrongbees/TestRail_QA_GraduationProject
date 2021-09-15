@@ -76,8 +76,8 @@ public class AttachFileWindow extends BasePage {
 
     @Step("Click Attach Button and return to the Add Test Case Page")
     public AddEditTestCasePage clickAttachButton() throws InterruptedException {
-   //     getAttachButton().click();
-        ((JavascriptExecutor) browsersService.getDriver()).executeScript("arguments[0].click();",  getAttachButton());
+        //     getAttachButton().click();
+        ((JavascriptExecutor) browsersService.getDriver()).executeScript("arguments[0].click();", getAttachButton());
         Thread.sleep(2000);
         ((JavascriptExecutor) browsersService.getDriver()).executeScript("window.scrollTo(0, document.body.scrollHeight)");
         return new AddEditTestCasePage(browsersService, false);
@@ -89,9 +89,8 @@ public class AttachFileWindow extends BasePage {
      */
 
     @Step("Click on the button Add New, upload file {fileName}")
-    public AttachFileWindow downloadFile(String fileName) throws AWTException, InterruptedException {
-        Thread.sleep(5000);
-        clickAddNewButton();
+    public AttachFileWindow downloadFile(String fileName) throws AWTException {
+               clickAddNewButton();
         RobotExecutor.downloadFile(fileName);
         int timeOut = 0;
         boolean isEnable = false;
@@ -101,29 +100,13 @@ public class AttachFileWindow extends BasePage {
 
                 isEnable = getDeleteButton().isDisplayed();
 
-            } catch (NoSuchElementException e) {e.printStackTrace();}
+            } catch (NoSuchElementException e) {
+                e.printStackTrace();
+            }
             browsersService.sleep(1000);
             timeOut++;
         }
         return this;
     }
-    @Step("Click on the button Add New, upload file {fileName}")
-    public AttachFileWindow downloadFile() throws AWTException, InterruptedException {
-      //  Thread.sleep(5000);
-    //    clickAddNewButton();
-//        RobotExecutor.downloadFile(fileName);
-        int timeOut = 0;
-        boolean isEnable = false;
 
-        while (timeOut < 20 & !isEnable) {
-            try {
-
-                isEnable = getDeleteButton().isDisplayed();
-
-            } catch (NoSuchElementException e) {e.printStackTrace();}
-            browsersService.sleep(1000);
-            timeOut++;
-        }
-        return this;
-    }
 }

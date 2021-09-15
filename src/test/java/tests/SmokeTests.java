@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import pages.AddEditTestCasePage;
 import pages.AdministrationProjectsPage;
 import pages.LoginPage;
+import pages.SomeTestCasePage;
 import pages.conformationPages.AttachFileWindow;
 
 import java.awt.*;
@@ -37,50 +38,20 @@ public class SmokeTests extends BaseUITest {
 
         cases = ModelsFactory.getCases();
 
-        AttachFileWindow window = new LoginPage(browsersService, true)
+
+        AddEditTestCasePage addEditTestCasePage = new LoginPage(browsersService, true)
                 .successfulLogin()
                 .clickProjectLink(this.project)
                 .clickDashboardTestCaseButton()
                 .clickAddTestCaseButton()
                 .addTestCase(cases)
                 .clickEntityAttachmentFieldButton()
-                .clickAddNewButton();
-
-
-        Robot robot = new Robot();
-        robot.delay(3000);
-        StringSelection stringSelection = new StringSelection(new File("TestCase.xlsx").getAbsolutePath());
-        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
-
-        robot.keyPress(KeyEvent.VK_CONTROL);
-        robot.keyPress(KeyEvent.VK_V);
-        robot.keyRelease(KeyEvent.VK_V);
-        robot.keyRelease(KeyEvent.VK_CONTROL);
-        robot.keyPress(KeyEvent.VK_ENTER);
-        robot.keyRelease(KeyEvent.VK_ENTER);
-
-        window = window
-                .downloadFile()
+                .downloadFile("StartTest.xml")
                 .clickAttachButton()
                 .clickAddTestCaseButton()//остановилась здесь
                 .clickEditTestCaseButton()
                 .clickEntityAttachmentFieldButton()
-                .clickAddNewButton();
-
-        robot = new Robot();
-        robot.delay(3000);
-        stringSelection = new StringSelection(new File("pooh.jpg").getAbsolutePath());
-        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
-
-        robot.keyPress(KeyEvent.VK_CONTROL);
-        robot.keyPress(KeyEvent.VK_V);
-        robot.keyRelease(KeyEvent.VK_V);
-        robot.keyRelease(KeyEvent.VK_CONTROL);
-        robot.keyPress(KeyEvent.VK_ENTER);
-        robot.keyRelease(KeyEvent.VK_ENTER);
-
-        AddEditTestCasePage addEditTestCasePage = window
-                .downloadFile()
+                .downloadFile("pooh.jpg")
                 .clickAttachButton();
 
         Assert.assertTrue(addEditTestCasePage.getAddTestCaseButton().isEnabled());

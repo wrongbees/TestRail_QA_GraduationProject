@@ -12,7 +12,5 @@ public abstract class BaseTest {
     public static Cases cases;
     public static Section currentSection;
     public static List<Cases> actualCaseslist = new ArrayList<>();
-    public BaseTest(){
-        System.out.println("Запускаем BaseTest");
-    }
+
 }
