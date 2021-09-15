@@ -40,24 +40,24 @@ public class RegressionTests extends BaseUITest {
         Assert.assertEquals(dashboardPage.getPopUpMessageTitleText(), "Compact View");
     }
 
-//    @Test(dependsOnMethods = "positivePopUpMessageTest")
-//    public void positiveUploadingFileTest() throws AWTException, InterruptedException {
-//        this.project = ModelsFactory.getProject();
-//        AddEditTestCasePage addTestCasePage = new LoginPage(browsersService, true)
-//                .successfulLogin()
-//                .clickAddProjectButton()
-//                .addProject(project)
-//                .clickReturnDashboardPageButton()
-//                .clickProjectLink(project)
-//                .clickDashboardTestCaseButton()
-//                .clickAddTestCaseButton()
-//                .addTestCase(ModelsFactory.getCases())
-//                .clickEntityAttachmentFieldButton()
-//                .downloadFile("config.properties")
-//                .clickAttachButton();
-//
-//        Assert.assertEquals(addTestCasePage.getFirstFileName(), "config.properties");
-//    }
+    @Test(dependsOnMethods = "positivePopUpMessageTest")
+    public void positiveUploadingFileTest() throws AWTException, InterruptedException {
+        this.project = ModelsFactory.getProject();
+        AddEditTestCasePage addTestCasePage = new LoginPage(browsersService, true)
+                .successfulLogin()
+                .clickAddProjectButton()
+                .addProject(project)
+                .clickReturnDashboardPageButton()
+                .clickProjectLink(project)
+                .clickDashboardTestCaseButton()
+                .clickAddTestCaseButton()
+                .addTestCase(ModelsFactory.getCases())
+                .clickEntityAttachmentFieldButton()
+                .downloadFile("config.properties")
+                .clickAttachButton();
+
+        Assert.assertEquals(addTestCasePage.getFirstFileName(), "config.properties");
+    }
 
         @Test(dependsOnMethods = "negativeSafetyTest")
     public void negativeNullBoundaryValueTest() {

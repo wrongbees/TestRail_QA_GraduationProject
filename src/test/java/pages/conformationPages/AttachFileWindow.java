@@ -45,8 +45,8 @@ public class AttachFileWindow extends BasePage {
         return browsersService.getDriver().findElement(WINDOW_TITLE);
     }
 
-    private WebElement getAddNewButton() {
-        return browsersService.getDriver().findElement(ADD_NEW_BUTTON);
+    private Button getAddNewButton() {
+        return new Button(browsersService,ADD_NEW_BUTTON);
     }
 
     private WebElement getAttachButton() {
@@ -57,13 +57,13 @@ public class AttachFileWindow extends BasePage {
         return new Button(browsersService, CANCEL_BUTTON);
     }
 
-    private Button getDeleteButton() {
-        return new Button(browsersService, DELETE_BUTTON);
+    private WebElement getDeleteButton() {
+        return browsersService.getWaiters().waitForVisibility(DELETE_BUTTON);
     }
 
     public AttachFileWindow clickAddNewButton() {
-        ((JavascriptExecutor) browsersService.getDriver()).executeScript("arguments[0].click();", getAddNewButton());
-  //      getAddNewButton().click();
+
+        getAddNewButton().click();
         return this;
     }
 
@@ -91,22 +91,24 @@ public class AttachFileWindow extends BasePage {
 
     @Step("Click on the button Add New, upload file {fileName}")
     public AttachFileWindow downloadFile(String fileName) throws AWTException, InterruptedException {
+        Thread.sleep(1000);
                clickAddNewButton();
         RobotExecutor.downloadFile(fileName);
-        int timeOut = 0;
-        boolean isEnable = false;
-
-        while (timeOut < 20 & !isEnable) {
-            try {
-
-                isEnable = getDeleteButton().isDisplayed();
-
-            } catch (NoSuchElementException e) {
-                e.printStackTrace();
-            }
-            browsersService.sleep(1000);
-            timeOut++;
-        }
+        getDeleteButton();
+//        int timeOut = 0;
+//        boolean isEnable = false;
+//
+//        while (timeOut < 20 & !isEnable) {
+//            try {
+//
+//                isEnable = getDeleteButton().isDisplayed();
+//
+//            } catch (NoSuchElementException e) {
+//                e.printStackTrace();
+//            }
+//            browsersService.sleep(1000);
+//            timeOut++;
+//        }
         return this;
     }
 

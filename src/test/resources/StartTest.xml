@@ -11,11 +11,11 @@
             <class name="tests.SmokeTests"/>
         </classes>
     </test>
-    <!--test name="Regression Tests">
+    <test name="Regression Tests">
         <classes>
             <class name="tests.RegressionTests"/>
         </classes>
-    </test-->
+    </test>
 </suite>
 
 
