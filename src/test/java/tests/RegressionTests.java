@@ -1,6 +1,6 @@
 package tests;
 
-import baseEntities.BaseTest;
+import baseEntities.BaseUITest;
 import core.ReadProperties;
 import models.ModelsFactory;
 import models.Project;
@@ -12,8 +12,8 @@ import pages.AddEditTestCasePage;
 
 import java.awt.*;
 
-public class RegressionTests extends BaseTest {
-    Project project;
+public class RegressionTests extends BaseUITest {
+    //Project project;
 
     @Test
     public void negativeLoginTest(){

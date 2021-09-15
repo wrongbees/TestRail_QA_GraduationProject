@@ -1,6 +1,5 @@
 package baseEntities;
 
-import baseEntities.BaseApiTest;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -13,7 +12,7 @@ public class Listener implements ITestListener {
     @Override
     public void onTestFailure(ITestResult result) {
         Object currentClass = result.getInstance();
-        WebDriver driver = ((BaseTest) currentClass).browsersService.getDriver();
+        WebDriver driver = ((BaseUITest) currentClass).browsersService.getDriver();
         byte[] scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
         saveScreenshot(scrFile);
     }

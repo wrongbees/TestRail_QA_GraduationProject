@@ -1,6 +1,6 @@
 package tests;
 
-import baseEntities.BaseTest;
+import baseEntities.BaseUITest;
 import io.qameta.allure.Description;
 import models.Cases;
 import models.ModelsFactory;
@@ -13,30 +13,31 @@ import pages.LoginPage;
 
 import java.awt.*;
 
-public class SmokeTests extends BaseTest {
-    Project project;
-    Cases cases;
+public class SmokeTests extends BaseUITest {
+   // Project project;
+   // Cases cases;
 
-    @Description("Positive test for adding a project using random values")
-    @Test
-    public void positiveAddProjectTest() {
-        this.project = ModelsFactory.getProject();
-        AdministrationProjectsPage adminPage = new LoginPage(browsersService, true)
-                .successfulLogin()
-                .clickAddProjectButton()
-                .addProject(project);
-
-        Assert.assertTrue(adminPage.projectIsFound(project));
-    }
+//    @Description("Positive test for adding a project using random values")
+//    @Test
+//    public void positiveAddProjectTest() {
+//        this.project = ModelsFactory.getProject();
+//        AdministrationProjectsPage adminPage = new LoginPage(browsersService, true)
+//                .successfulLogin()
+//                .clickAddProjectButton()
+//                .addProject(project);
+//
+//        Assert.assertTrue(adminPage.projectIsFound(project));
+//    }
 
     @Description("Positive test for editing a test case by uploading a second file")
-    @Test(dependsOnMethods = "positiveAddProjectTest")
+    @Test//(dependsOnMethods = "positiveAddProjectTest")
     public void positiveEditTestCaseTest() throws AWTException, InterruptedException {
+        System.out.println(project.getName());
         cases = ModelsFactory.getCases();
 
         AddEditTestCasePage addEditTestCasePage = new LoginPage(browsersService, true)
                 .successfulLogin()
-                .clickProjectLink(project)
+                .clickProjectLink(this.project)
                 .clickDashboardTestCaseButton()
                 .clickAddTestCaseButton()
                 .addTestCase(cases)

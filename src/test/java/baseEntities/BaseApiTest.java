@@ -7,7 +7,7 @@ import org.apache.http.protocol.HTTP;
 import org.testng.annotations.BeforeTest;
 import static io.restassured.RestAssured.given;
 
-public abstract class BaseApiTest {
+public abstract class BaseApiTest extends BaseTest{
 
     @BeforeTest
     public void setup(){

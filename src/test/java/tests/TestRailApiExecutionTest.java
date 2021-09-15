@@ -18,20 +18,20 @@ import java.util.List;
 
 public class TestRailApiExecutionTest extends BaseApiTest {
     int numberOfCases = 3;
-    Project project;
-    Section currentSection;
+   // Project project;
+   // Section currentSection;
 
-    List<Cases> actualCaseslist = new ArrayList<>();
+   // List<Cases> actualCaseslist = new ArrayList<>();
 
     @Test
     public void addCasesTest() {
         Project projectModels = ModelsFactory.getProject();
 
-        project = new ProjectsAdapter().add(projectModels);
+       this.project = new ProjectsAdapter().add(projectModels);
 
         Section sectionModels = ModelsFactory.getSection();
 
-        currentSection = new SectionAdapter().add(sectionModels, project.getId());
+        this.currentSection = new SectionAdapter().add(sectionModels, project.getId());
 
         for (int count = 1; count <= numberOfCases; count++) {
             Cases casesModels = ModelsFactory.getCases();
@@ -75,11 +75,12 @@ public class TestRailApiExecutionTest extends BaseApiTest {
 
         Cases actual_case = new CasesAdapter().updateCase(actualCaseslist.get(0).getId(), expected_cases);
         Assert.assertTrue(actual_case.getTitle().equals(expected_cases.getTitle()));
+        System.out.println(project.getName());
     }
 
-    @Test(dependsOnMethods = "updateCaseTest")
-    public void deleteProject(){
-        new ProjectsAdapter().delete(project.getId());
-    }
+//    @Test(dependsOnMethods = "updateCaseTest")
+//    public void deleteProject(){
+//        new ProjectsAdapter().delete(project.getId());
+//    }
 }
 

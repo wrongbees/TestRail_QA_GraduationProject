@@ -29,6 +29,7 @@ public class RobotExecutor {
         robot.setAutoDelay(1000);
         robot.keyPress(KeyEvent.VK_CONTROL);
         robot.keyPress(KeyEvent.VK_V);
+        robot.keyRelease(KeyEvent.VK_V);
 
         robot.keyRelease(KeyEvent.VK_CONTROL);
         robot.keyRelease(KeyEvent.VK_V);
@@ -39,3 +40,4 @@ public class RobotExecutor {
         System.out.println("******************робот выключился*****************");
     }
 }
+

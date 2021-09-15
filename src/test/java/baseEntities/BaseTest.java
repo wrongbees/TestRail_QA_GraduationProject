@@ -1,23 +1,18 @@
 package baseEntities;
 
-import core.BrowsersService;
+import models.Cases;
+import models.Project;
+import models.Section;
 
-import org.testng.annotations.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import java.net.MalformedURLException;
-
-@Listeners(Listener.class)
 public abstract class BaseTest {
-    public BrowsersService browsersService;
-
-    @BeforeMethod
-    public void startBrowser() throws MalformedURLException {
-        browsersService = new BrowsersService();
-    }
-
-    @AfterMethod
-    public void closeBrowser() {
-        browsersService.getDriver().quit();
-        browsersService = null;
+    public static Project project;
+    public static Cases cases;
+    public static Section currentSection;
+    public static List<Cases> actualCaseslist = new ArrayList<>();
+    public BaseTest(){
+        System.out.println("Запускаем BaseTest");
     }
 }
