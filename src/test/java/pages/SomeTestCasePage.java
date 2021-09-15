@@ -4,6 +4,7 @@ import baseEntities.BasePage;
 import core.BrowsersService;
 import core.ReadProperties;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import wrappers.Button;
@@ -46,10 +47,11 @@ public class SomeTestCasePage extends BasePage {
 
 
 
-    private Button getEditTestCaseButton(){ return new Button(browsersService, EDIT_TEST_CASES_BUTTON);}
+    private WebElement getEditTestCaseButton(){ return browsersService.getDriver().findElement(EDIT_TEST_CASES_BUTTON);}
 
     public AddEditTestCasePage clickEditTestCaseButton(){
-        getEditTestCaseButton().click();
+       // getEditTestCaseButton().click();
+        ((JavascriptExecutor) browsersService.getDriver()).executeScript("arguments[0].click();", getEditTestCaseButton());
         return  new AddEditTestCasePage(browsersService,false);
     }
     public String getTitleText(){
