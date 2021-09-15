@@ -58,12 +58,13 @@ public class AddEditTestCasePage extends BasePage {
         return new InputField(browsersService, REFERENCE_FIELD);
     }
 
-    private Button getEntityAttachmentEmptyField() {
-        return new Button(browsersService, ENTITY_ATTACHMENT_LIST_EMPTY_ICON);
+    private WebElement getEntityAttachmentEmptyField() {
+        return browsersService.getDriver().findElement(ENTITY_ATTACHMENT_LIST_EMPTY_ICON);
+       // return new Button(browsersService, ENTITY_ATTACHMENT_LIST_EMPTY_ICON);
     }
 
-    private Button getEntityAttachmentAddField() {
-        return new Button(browsersService, ENTITY_ATTACHMENT_LIST_ADD);
+    private WebElement getEntityAttachmentAddField() {
+        return browsersService.getDriver().findElement(ENTITY_ATTACHMENT_LIST_ADD);
     }
 
     public Button getCancelButton() {
@@ -129,9 +130,11 @@ public class AddEditTestCasePage extends BasePage {
     @Step("Click on the download button for the Test Case and open the file download window")
     public AttachFileWindow clickEntityAttachmentFieldButton() {
         try {
-            getEntityAttachmentEmptyField().click();
+            ((JavascriptExecutor) browsersService.getDriver()).executeScript("arguments[0].click();", getEntityAttachmentEmptyField());
+           // getEntityAttachmentEmptyField().click();
         } catch (ElementNotInteractableException ex) {
-            getEntityAttachmentAddField().click();
+            ((JavascriptExecutor) browsersService.getDriver()).executeScript("arguments[0].click();",  getEntityAttachmentAddField());
+            //getEntityAttachmentAddField().click();
         }
         return new AttachFileWindow(browsersService);
     }
