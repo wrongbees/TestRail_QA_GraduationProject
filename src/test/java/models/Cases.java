@@ -11,18 +11,8 @@ public class Cases {
     String title;
     @Expose
     int id;
- //   @Expose
-//    int template_id;
-//    @Expose
-//    int type_id;
-//    @Expose
-//    int  priority_id;
-//    @Expose
-//    long estimate;
-//    @Expose
-//    int milestone_id;
     @Expose
- String refs;
+    String refs;
 
 
 }

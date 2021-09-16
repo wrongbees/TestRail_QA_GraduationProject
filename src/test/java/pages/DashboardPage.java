@@ -24,7 +24,6 @@ public class DashboardPage extends HeaderDashboard {
     private final static By PROJECTS_LIST = By.xpath("//table[@class = 'grid']//tr[@class != 'header']//td[3]//a[1]");
     private final static By ICON_FOR_POPUP = By.className("icon-display-small");
     private final static By TITLE_POPUP_MESSAGE = By.className("tooltip-header");
-
     private final static String OPEN_SOME_PROJECT_BUTTON = "//*[@class='grid']//a[contains(text(), '%s')]";
 
 
@@ -112,7 +111,7 @@ public class DashboardPage extends HeaderDashboard {
                     return true;
                 }
             }
-        } catch (NoSuchElementException e) {
+        } catch (NoSuchElementException ignored) {
         }
         return false;
     }

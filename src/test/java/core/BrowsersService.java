@@ -18,7 +18,7 @@ public class BrowsersService {
 
     public BrowsersService() throws MalformedURLException {
         switch (ReadProperties.getInstance().getBrowserName().toLowerCase()) {
-            case "chrome" :
+            case "chrome":
                 WebDriverManager.getInstance(DriverManagerType.CHROME).setup();
                 ChromeOptions chromeOptions = new ChromeOptions();
                 chromeOptions.setHeadless(ReadProperties.getInstance().isHeadless());
@@ -29,18 +29,19 @@ public class BrowsersService {
 
                 driver = new ChromeDriver(chromeOptions);
                 break;
-            case "firefox" :
+            case "firefox":
 
                 WebDriverManager.getInstance(DriverManagerType.FIREFOX).setup();
                 driver = new FirefoxDriver();
-            break;
-
-            case "remote_chrome" :
-                chromeOptions = new ChromeOptions();
-                driver = new RemoteWebDriver(new URL("http://192.168.56.1:4444/wd/hub"),chromeOptions);
                 break;
 
-            default : System.out.println("Browser " + ReadProperties.getInstance().getBrowserName() + " is not supported.");
+            case "remote_chrome":
+                chromeOptions = new ChromeOptions();
+                driver = new RemoteWebDriver(new URL("http://192.168.56.1:4444/wd/hub"), chromeOptions);
+                break;
+
+            default:
+                System.out.println("Browser " + ReadProperties.getInstance().getBrowserName() + " is not supported.");
         }
 
         waiters = new Waits(driver);

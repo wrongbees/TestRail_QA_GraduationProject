@@ -9,23 +9,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Table {
-    private BrowsersService browsersService;
     private UIElement uiElement;
     private List<TableRow> tableRowList = new ArrayList<>();
 
     public Table(BrowsersService browsersService, WebElement webElement) {
-        this.browsersService = browsersService;
         uiElement = new UIElement(browsersService, webElement);
-
 
         for (WebElement element : uiElement.findElements(By.xpath("//tr[@class != 'header']")))
             tableRowList.add(new TableRow(browsersService, element));
 
     }
 
-    public UIElement getDeleteCell(String projectName) {return getRowByText(projectName).getCellByIndex(3);}
+    public UIElement getDeleteCell(String projectName) {
+        return getRowByText(projectName).getCellByIndex(3);
+    }
 
-    public UIElement getEditCell(String projectName) {return getRowByText(projectName).getCellByIndex(2);}
+    public UIElement getEditCell(String projectName) {
+        return getRowByText(projectName).getCellByIndex(2);
+    }
 
     private TableRow getRowByText(String projectName) {
         for (TableRow row : tableRowList) {
@@ -36,14 +37,15 @@ public class Table {
     }
 
     public boolean presentInTheTable(String projectName) {
-        if (projectName == null){return false;}
+        if (projectName == null) {
+            return false;
+        }
 
         for (TableRow row : tableRowList) {
-            if (row.getCellByIndex(1).findElement(By.xpath("./a[1]")).getText().equalsIgnoreCase(projectName)){
+            if (row.getCellByIndex(1).findElement(By.xpath("./a[1]")).getText().equalsIgnoreCase(projectName)) {
                 System.out.println(row.getCellByIndex(1).findElement(By.xpath("./a[1]")).getText());
                 return true;
             }
-
         }
         // logger.info("Project not found");
         return false;

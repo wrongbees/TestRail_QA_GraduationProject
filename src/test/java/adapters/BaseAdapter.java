@@ -6,11 +6,10 @@ import com.google.gson.GsonBuilder;
 public class BaseAdapter {
 
     Gson gson;
-    public BaseAdapter(){
+
+    public BaseAdapter() {
         gson = new GsonBuilder()
                 .excludeFieldsWithoutExposeAnnotation()
                 .create();
-
-
     }
 }

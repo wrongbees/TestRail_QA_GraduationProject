@@ -18,11 +18,11 @@ public class TestRailApiExecutionTest extends BaseApiTest {
     public void addCasesTest() {
         Project projectModels = ModelsFactory.getProject();
 
-       this.project = new ProjectsAdapter().add(projectModels);
+        project = new ProjectsAdapter().add(projectModels);
 
         Section sectionModels = ModelsFactory.getSection();
 
-        this.currentSection = new SectionAdapter().add(sectionModels, project.getId());
+        currentSection = new SectionAdapter().add(sectionModels, project.getId());
 
         for (int count = 1; count <= numberOfCases; count++) {
             Cases casesModels = ModelsFactory.getCases();
@@ -35,7 +35,7 @@ public class TestRailApiExecutionTest extends BaseApiTest {
         Cases actualCases = actualCasesList.get(0);
         Cases cases = new CasesAdapter().get(actualCases);
 
-        Assert.assertTrue(cases.getTitle().equals(actualCases.getTitle()));
+        Assert.assertEquals(actualCases.getTitle(), cases.getTitle());
     }
 
     @Test(dependsOnMethods = "getCasesTest")
@@ -65,7 +65,7 @@ public class TestRailApiExecutionTest extends BaseApiTest {
                 .build();
 
         Cases actual_case = new CasesAdapter().updateCase(actualCasesList.get(0).getId(), expected_cases);
-        Assert.assertTrue(actual_case.getTitle().equals(expected_cases.getTitle()));
+        Assert.assertEquals(expected_cases.getTitle(), actual_case.getTitle());
         System.out.println(project.getName());
     }
 }

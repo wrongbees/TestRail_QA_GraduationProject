@@ -43,18 +43,19 @@ public class AdministrationProjectsPage extends HeaderDashboard {
     }
 
     public AdministrationProjectsPage deleteProject(Project project) {
-
         table.getDeleteCell(project.getName()).click();
-       return new ConfirmationDeleteWindow(browsersService)
+        return new ConfirmationDeleteWindow(browsersService)
                 .checkBoxDelete()
                 .clickButtonOk();
     }
 
-    public ConfirmationDeleteWindow openConformationDeleteWindow(Project project){
+    public ConfirmationDeleteWindow openConformationDeleteWindow(Project project) {
         table.getDeleteCell(project.getName()).click();
         return new ConfirmationDeleteWindow(browsersService);
     }
 
-    public boolean projectIsFound(Project project){return table.presentInTheTable(project.getName());}
+    public boolean projectIsFound(Project project) {
+        return table.presentInTheTable(project.getName());
+    }
 
 }

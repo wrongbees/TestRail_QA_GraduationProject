@@ -24,15 +24,5 @@ public class SectionAdapter extends BaseAdapter {
         return gson.fromJson(response.asString().trim(), Section.class);
     }
 
-    public int getSuitID(int id) {
-        return given()
-                .when()
-                .get(String.format(SectionEndpoints.GET_SECTION, id))
-                .then()
-                .log().body()
-                .log().status()
-                .statusCode(HttpStatus.SC_BAD_REQUEST)
-                .extract().jsonPath().get("suite_id");
 
-    }
 }

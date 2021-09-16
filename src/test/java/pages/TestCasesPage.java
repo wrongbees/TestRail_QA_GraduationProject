@@ -5,7 +5,6 @@ import core.BrowsersService;
 import core.ReadProperties;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import wrappers.Button;
@@ -36,19 +35,18 @@ public class TestCasesPage extends BasePage {
         }
     }
 
-    private WebElement getTestCasesInstallationName(){
+    private WebElement getTestCasesInstallationName() {
         return browsersService.getWaiters().waitForVisibility(TEST_CASES_TITLE);
     }
 
-    private WebElement getAddTestCaseButton(){
-        return browsersService.getWaiters().waitForClickable(ADD_TEST_CASE_BUTTON);
+    private Button getAddTestCaseButton() {
+        return new Button(browsersService, ADD_TEST_CASE_BUTTON);
     }
 
     @Step("Click on the button Add Test Case and go to the Add Test Case Page")
-    public AddEditTestCasePage clickAddTestCaseButton(){
-        ((JavascriptExecutor) browsersService.getDriver()).executeScript("arguments[0].click();", getAddTestCaseButton());
-//        getAddTestCaseButton()
-//                .click();
-        return new AddEditTestCasePage(browsersService,false);
+    public AddEditTestCasePage clickAddTestCaseButton() {
+        getAddTestCaseButton()
+                .click();
+        return new AddEditTestCasePage(browsersService, false);
     }
 }

@@ -36,7 +36,7 @@ public class ModelsFactory {
     }
 
     public static String stringGenerator(int numberOfSymbols) {
-        String [] symbols = "012345678qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM".split("");
+        String[] symbols = "012345678qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM".split("");
         StringBuilder newGeneratedString = new StringBuilder();
         for (int i = 0; i < numberOfSymbols; i++) {
             int randomIndex = random.nextInt(symbols.length);

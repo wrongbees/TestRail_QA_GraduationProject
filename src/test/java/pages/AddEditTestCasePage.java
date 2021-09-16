@@ -60,7 +60,6 @@ public class AddEditTestCasePage extends BasePage {
 
     private WebElement getEntityAttachmentEmptyField() {
         return browsersService.getDriver().findElement(ENTITY_ATTACHMENT_LIST_EMPTY_ICON);
-       // return new Button(browsersService, ENTITY_ATTACHMENT_LIST_EMPTY_ICON);
     }
 
     private WebElement getEntityAttachmentAddField() {
@@ -71,8 +70,8 @@ public class AddEditTestCasePage extends BasePage {
         return new Button(browsersService, CANCEL_BUTTON);
     }
 
-    public WebElement getAddTestCaseButton() {
-        return browsersService.getDriver().findElement(ADD_TEST_CASE_BUTTON);
+    public Button getAddTestCaseButton() {
+        return new Button(browsersService, ADD_TEST_CASE_BUTTON);
     }
 
     public WebElement getTestCaseErrorLabel() {
@@ -92,9 +91,8 @@ public class AddEditTestCasePage extends BasePage {
     }
 
     public SomeTestCasePage clickAddTestCaseButton() {
-        ((JavascriptExecutor) browsersService.getDriver()).executeScript("arguments[0].click();",  getAddTestCaseButton());
-//        getAddTestCaseButton()
-//                .click();
+        getAddTestCaseButton()
+                .click();
         return new SomeTestCasePage(browsersService, false);
     }
 
@@ -131,23 +129,14 @@ public class AddEditTestCasePage extends BasePage {
     public AttachFileWindow clickEntityAttachmentFieldButton() {
         try {
             ((JavascriptExecutor) browsersService.getDriver()).executeScript("arguments[0].click();", getEntityAttachmentEmptyField());
-           // getEntityAttachmentEmptyField().click();
         } catch (ElementNotInteractableException ex) {
-            ((JavascriptExecutor) browsersService.getDriver()).executeScript("arguments[0].click();",  getEntityAttachmentAddField());
-            //getEntityAttachmentAddField().click();
+            ((JavascriptExecutor) browsersService.getDriver()).executeScript("arguments[0].click();", getEntityAttachmentAddField());
         }
         return new AttachFileWindow(browsersService);
     }
 
-    /**
-     * Метод возвращает имя файл обрезая фразу (Click and hold to enter delete mode)
-     */
     public String getFirstFileName() {
         return getFirstFileInAttachmentList().getAttribute("title")
                 .replace("(Click and hold to enter delete mode)", "").trim();
     }
-//    public AddEditTestCasePage scrollIntoViewButtonSave(){
-//        ((JavascriptExecutor) browsersService.getDriver()).executeScript("window.scrollTo(0, document.body.scrollHeight)");
-//    return new AddEditTestCasePage(browsersService,false);
-//    }
 }

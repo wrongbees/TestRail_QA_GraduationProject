@@ -15,7 +15,6 @@ public class RobotExecutor {
         File file;
         StringSelection stringSelection;
 
-
         classLoader = RobotExecutor.class.getClassLoader();
 
         file = new File(Objects.requireNonNull(classLoader.getResource(fileName)).getFile());
@@ -26,8 +25,8 @@ public class RobotExecutor {
 
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
         System.out.println(Toolkit.getDefaultToolkit().getSystemClipboard());
-        robot.delay(3000);
 
+        robot.delay(3000);
         robot.keyPress(KeyEvent.VK_CONTROL);
         robot.keyPress(KeyEvent.VK_V);
         robot.keyRelease(KeyEvent.VK_V);
@@ -35,7 +34,6 @@ public class RobotExecutor {
         robot.keyPress(KeyEvent.VK_ENTER);
         robot.keyRelease(KeyEvent.VK_ENTER);
         Thread.sleep(5000);
-
     }
 }
 

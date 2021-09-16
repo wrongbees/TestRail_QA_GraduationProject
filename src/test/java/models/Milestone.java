@@ -27,7 +27,4 @@ public class Milestone {
     boolean is_started;
     @Expose
     boolean is_completed;
-
-
-
 }

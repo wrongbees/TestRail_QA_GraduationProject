@@ -34,26 +34,26 @@ public class ConfirmationDeleteWindow extends BasePage {
         }
     }
 
-    private WebElement getWindowTitle(){
+    private WebElement getWindowTitle() {
         return browsersService.getWaiters().waitForVisibility(WINDOW_TITLE);
     }
 
-    public ConfirmationDeleteWindow checkBoxDelete(){
-        new CheckBox(browsersService,DELETE_CHECKBOX).changeState(true);
+    public ConfirmationDeleteWindow checkBoxDelete() {
+        new CheckBox(browsersService, DELETE_CHECKBOX).changeState(true);
         return this;
     }
 
-    public ConfirmationDeleteWindow unCheckBoxDelete(){
-        new CheckBox(browsersService,DELETE_CHECKBOX).changeState(false);
+    public ConfirmationDeleteWindow unCheckBoxDelete() {
+        new CheckBox(browsersService, DELETE_CHECKBOX).changeState(false);
         return this;
     }
 
-    public AdministrationProjectsPage clickButtonOk(){
-        new Button(browsersService,BUTTON_OK).click();
-        return new AdministrationProjectsPage(browsersService,false);
+    public AdministrationProjectsPage clickButtonOk() {
+        new Button(browsersService, BUTTON_OK).click();
+        return new AdministrationProjectsPage(browsersService, false);
     }
 
-    public String getWindowTitleText(){
+    public String getWindowTitleText() {
         return getWindowTitle().getText();
     }
 }

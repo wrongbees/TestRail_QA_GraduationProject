@@ -8,13 +8,8 @@ import org.testng.annotations.Test;
 import pages.AddEditTestCasePage;
 import pages.AdministrationProjectsPage;
 import pages.LoginPage;
-import pages.SomeTestCasePage;
-import pages.conformationPages.AttachFileWindow;
 
 import java.awt.*;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.KeyEvent;
-import java.io.File;
 
 public class SmokeTests extends BaseUITest {
 

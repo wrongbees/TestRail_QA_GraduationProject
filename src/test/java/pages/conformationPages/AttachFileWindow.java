@@ -94,21 +94,21 @@ public class AttachFileWindow extends BasePage {
         Thread.sleep(1000);
                clickAddNewButton();
         RobotExecutor.downloadFile(fileName);
-        getDeleteButton();
-//        int timeOut = 0;
-//        boolean isEnable = false;
-//
-//        while (timeOut < 20 & !isEnable) {
-//            try {
-//
-//                isEnable = getDeleteButton().isDisplayed();
-//
-//            } catch (NoSuchElementException e) {
-//                e.printStackTrace();
-//            }
-//            browsersService.sleep(1000);
-//            timeOut++;
-//        }
+       // getDeleteButton();
+        int timeOut = 0;
+        boolean isEnable = false;
+
+        while (timeOut < 20 & !isEnable) {
+            try {
+
+                isEnable = getDeleteButton().isDisplayed();
+
+            } catch (NoSuchElementException e) {
+                e.printStackTrace();
+            }
+            browsersService.sleep(1000);
+            timeOut++;
+        }
         return this;
     }
 

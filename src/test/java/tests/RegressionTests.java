@@ -3,29 +3,30 @@ package tests;
 import baseEntities.BaseUITest;
 import core.ReadProperties;
 import models.ModelsFactory;
-import models.Project;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.*;
-import pages.conformationPages.ConfirmationDeleteWindow;
 import pages.AddEditTestCasePage;
+import pages.DashboardPage;
+import pages.LoginPage;
+import pages.SomeTestCasePage;
+import pages.conformationPages.ConfirmationDeleteWindow;
 
 import java.awt.*;
 
 public class RegressionTests extends BaseUITest {
 
     @Test
-    public void negativeLoginTest(){
-        LoginPage loginPage = new LoginPage(browsersService,true)
+    public void negativeLoginTest() {
+        LoginPage loginPage = new LoginPage(browsersService, true)
                 .unsuccessfulLogin();
 
         Assert.assertEquals(loginPage.getErrorLoginMessageTest(), "Email/Login or Password is incorrect. Please try again.");
     }
 
     @Test(dependsOnMethods = "negativeLoginTest")
-    public void negativeSafetyTest(){
-        LoginPage loginPage = new LoginPage(browsersService,true)
-               .loginWithParameters("SELECT * FROM users WHERE id=1'", ReadProperties.getInstance().getPassword());
+    public void negativeSafetyTest() {
+        LoginPage loginPage = new LoginPage(browsersService, true)
+                .loginWithParameters("SELECT * FROM users WHERE id=1'", ReadProperties.getInstance().getPassword());
 
         Assert.assertEquals(loginPage.getErrorLoginMessageTest(), "Email/Login or Password is incorrect. Please try again.");
     }
@@ -58,7 +59,7 @@ public class RegressionTests extends BaseUITest {
         Assert.assertEquals(addTestCasePage.getFirstFileName(), "config.properties");
     }
 
-        @Test(dependsOnMethods = "negativeSafetyTest")
+    @Test(dependsOnMethods = "negativeSafetyTest")
     public void negativeNullBoundaryValueTest() {
         project = ModelsFactory.getProject();
         AddEditTestCasePage addTestCasePage = new LoginPage(browsersService, true)
@@ -77,7 +78,7 @@ public class RegressionTests extends BaseUITest {
 
     @Test(dependsOnMethods = "negativeNullBoundaryValueTest",
             dataProvider = "BoundaryInputFiledValue",
-            dataProviderClass = DataProvider.class,alwaysRun = true)
+            dataProviderClass = DataProvider.class, alwaysRun = true)
     public void positiveBoundaryValuesTest(int numberOfValuesInputFiled) {
         String newGeneratedString = ModelsFactory.stringGenerator(numberOfValuesInputFiled);
         SomeTestCasePage someTestCasePage = new LoginPage(browsersService, true)

@@ -22,7 +22,7 @@ public class Button {
         return this.uiElement.isDisplayed();
     }
 
-    public boolean isEnabled(){
+    public boolean isEnabled() {
         return this.uiElement.isEnabled();
     }
 }

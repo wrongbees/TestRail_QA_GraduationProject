@@ -19,5 +19,4 @@ public class Section {
     int display_order;
     @Expose
     int depth;
-
 }

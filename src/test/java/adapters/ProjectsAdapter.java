@@ -4,7 +4,6 @@ import com.google.common.reflect.TypeToken;
 import endpoints.ProjectEndpoints;
 import io.restassured.mapper.ObjectMapperType;
 import io.restassured.response.Response;
-import models.Cases;
 import models.Project;
 import org.apache.http.HttpStatus;
 
@@ -16,14 +15,14 @@ public class ProjectsAdapter extends BaseAdapter {
 
     public List<Project> get() {
 
-        Response respons = given()
+        Response response = given()
                 .when()
                 .get(ProjectEndpoints.GET_ALL_PROJECTS)
                 .then()
                 .statusCode(HttpStatus.SC_OK)
                 .extract().response();
 
-        return (List<Project>) gson.fromJson(respons.asString().trim(), new TypeToken<List<Project>>() {
+        return (List<Project>) gson.fromJson(response.asString().trim(), new TypeToken<List<Project>>() {
         }.getType());
 
     }
@@ -41,7 +40,7 @@ public class ProjectsAdapter extends BaseAdapter {
         return gson.fromJson(response.asString().trim(), Project.class);
     }
 
-    public Project add(Project project){
+    public Project add(Project project) {
         Response response = given()
                 .body(project, ObjectMapperType.GSON)
                 .when()
@@ -54,10 +53,10 @@ public class ProjectsAdapter extends BaseAdapter {
 
     }
 
-    public void delete(int projectId){
+    public void delete(int projectId) {
         given()
                 .when()
-                .post(String.format(ProjectEndpoints.DELETE_PROJECTS,projectId))
+                .post(String.format(ProjectEndpoints.DELETE_PROJECTS, projectId))
                 .then()
                 .statusCode(HttpStatus.SC_OK);
 

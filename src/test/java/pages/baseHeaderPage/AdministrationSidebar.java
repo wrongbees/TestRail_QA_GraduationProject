@@ -38,8 +38,8 @@ public class AdministrationSidebar extends BasePage {
         return new Button(browsersService, PROJECTS_BUTTON);
     }
 
-    public AdministrationProjectsPage clickProjectsButton(){
+    public AdministrationProjectsPage clickProjectsButton() {
         getProjectsButton().click();
-        return new AdministrationProjectsPage(browsersService,false);
+        return new AdministrationProjectsPage(browsersService, false);
     }
 }

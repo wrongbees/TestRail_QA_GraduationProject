@@ -66,24 +66,28 @@ public class AddProjectPage extends BasePage {
         return new Button(browsersService, ADD_PROJECT_BUTTON);
     }
 
-    private void inputNameProject(String nameProject) {
+    private AddProjectPage inputNameProject(String nameProject) {
         getNameProjectInput()
                 .sendKeys(nameProject);
+        return this;
     }
 
-    private void inputAnnouncementProjectInput(String announcementProject) {
+    private AddProjectPage inputAnnouncementProjectInput(String announcementProject) {
         getAnnouncementProjectInput()
                 .sendKeys(announcementProject);
+        return this;
     }
 
-    private void setShowAnnouncementProjectCheckBox(boolean makeSelected) {
+    private AddProjectPage setShowAnnouncementProjectCheckBox(boolean makeSelected) {
         getShowAnnouncementProjectCheckBox()
                 .changeState(makeSelected);
+        return this;
     }
 
-    private void setRadioButtonAddProject(int indexSuiteMode) {
+    private AddProjectPage setRadioButtonAddProject(int indexSuiteMode) {
         getRadioButtonAddProject()
                 .selectByIndex(indexSuiteMode);
+        return this;
     }
 
     private void clickAddProjectButton() {
@@ -93,13 +97,13 @@ public class AddProjectPage extends BasePage {
 
     @Step("Fill the project attributes with random values, " +
             "click on the button Add Project and go to the Administration Page")
-    public AdministrationProjectsPage addProject(Project project){
-        inputNameProject(project.getName());
-        inputAnnouncementProjectInput(project.getAnnouncement());
-        setShowAnnouncementProjectCheckBox(project.isShow_announcement());
-        setRadioButtonAddProject(project.getSuite_mode());
-        clickAddProjectButton();
-        return new AdministrationProjectsPage(browsersService,false);
+    public AdministrationProjectsPage addProject(Project project) {
+        inputNameProject(project.getName())
+                .inputAnnouncementProjectInput(project.getAnnouncement())
+                .setShowAnnouncementProjectCheckBox(project.isShow_announcement())
+                .setRadioButtonAddProject(project.getSuite_mode())
+                .clickAddProjectButton();
+        return new AdministrationProjectsPage(browsersService, false);
     }
 
 }

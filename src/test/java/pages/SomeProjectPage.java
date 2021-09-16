@@ -1,13 +1,11 @@
 package pages;
 
-import baseEntities.BasePage;
 import core.BrowsersService;
 import core.ReadProperties;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import pages.baseHeaderPage.HeaderDashboard;
-import wrappers.Button;
 
 public class SomeProjectPage extends HeaderDashboard {
 

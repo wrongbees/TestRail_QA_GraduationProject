@@ -1,13 +1,10 @@
 package adapters;
 
-import com.google.common.reflect.TypeToken;
 import endpoints.CasesEndpoint;
 import io.restassured.mapper.ObjectMapperType;
 import io.restassured.response.Response;
 import models.Cases;
 import org.apache.http.HttpStatus;
-
-import java.util.List;
 
 import static io.restassured.RestAssured.given;
 
@@ -74,7 +71,7 @@ public class CasesAdapter extends BaseAdapter {
 
     }
 
-    public Cases updateCase(int caseId, Cases cases){
+    public Cases updateCase(int caseId, Cases cases) {
         Response response = given()
                 .body(cases, ObjectMapperType.GSON)
                 .when()
@@ -86,18 +83,5 @@ public class CasesAdapter extends BaseAdapter {
                 .extract().response();
 
         return gson.fromJson(response.asString().trim(), Cases.class);
-    }
-
-    public Response deleteCases(int projectId, int suitId){
-        Response response = given()
-                .when()
-                .post(String.format(CasesEndpoint.DELETE_CASE, projectId, suitId))
-                .then()
-                .log().body()
-                .log().status()
-                .statusCode(HttpStatus.SC_OK)
-                .extract().response();
-
-        return response;
     }
 }
