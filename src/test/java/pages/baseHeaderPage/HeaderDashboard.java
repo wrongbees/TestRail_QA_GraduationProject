@@ -50,18 +50,20 @@ public class HeaderDashboard extends BasePage {
         return new Button(browsersService, DASHBOARD_TEST_CASE_TITLE);
     }
 
+    @Step("Click on the Administration button and go to the Overview Page")
     public AdministrationSidebar clickAdministrationButton() {
         getAdministrationButton().click();
         return new AdministrationSidebar(browsersService, false);
     }
 
+    @Step("Click on the Dashboard button and go to the Dashboard Page")
     public DashboardPage clickReturnDashboardPageButton() {
         getReturnDashboardButton()
                 .click();
         return new DashboardPage(browsersService, false);
     }
 
-    @Step("Go to the Test case tab")
+    @Step("Click on dashboard Test Case button and go to the Test cases page")
     public TestCasesPage clickDashboardTestCaseButton() {
         getDashboardTestCaseButton()
                 .click();

@@ -95,8 +95,8 @@ public class AddProjectPage extends BasePage {
                 .click();
     }
 
-    @Step("Fill the project attributes with random values, " +
-            "click on the button Add Project and go to the Administration Page")
+    @Step("Fill the project attributes with random values {project}, " +
+            "click on the button Add Project and go to the Administration Projects Page")
     public AdministrationProjectsPage addProject(Project project) {
         inputNameProject(project.getName())
                 .inputAnnouncementProjectInput(project.getAnnouncement())

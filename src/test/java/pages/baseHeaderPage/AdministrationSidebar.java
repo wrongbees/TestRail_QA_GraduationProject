@@ -2,6 +2,7 @@ package pages.baseHeaderPage;
 
 import baseEntities.BasePage;
 import core.BrowsersService;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -38,6 +39,7 @@ public class AdministrationSidebar extends BasePage {
         return new Button(browsersService, PROJECTS_BUTTON);
     }
 
+    @Step("Click on the Projects button and go to the Administration Projects Button")
     public AdministrationProjectsPage clickProjectsButton() {
         getProjectsButton().click();
         return new AdministrationProjectsPage(browsersService, false);

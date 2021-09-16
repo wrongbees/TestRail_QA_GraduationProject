@@ -85,7 +85,7 @@ public class DashboardPage extends HeaderDashboard {
     /**
      * Нажимаем на название проекта в таблице
      */
-    @Step("Go to the page of the project")
+    @Step("Click on the button with name project {project} and go to the its page")
     public SomeProjectPage clickProjectLink(Project project) {
 
         for (WebElement element : getProjectList()) {
@@ -116,6 +116,7 @@ public class DashboardPage extends HeaderDashboard {
         return false;
     }
 
+    @Step("Hover over the Compact View button")
     public DashboardPage actionForPopUp() {
         actions = new Actions(browsersService.getDriver());
         actions

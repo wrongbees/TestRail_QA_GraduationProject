@@ -2,6 +2,7 @@ package pages;
 
 import core.BrowsersService;
 import core.ReadProperties;
+import io.qameta.allure.Step;
 import models.Project;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -42,6 +43,7 @@ public class AdministrationProjectsPage extends HeaderDashboard {
         return browsersService.getDriver().findElement(PROJECTS_PAGE_TITLE);
     }
 
+    @Step("Delete project {project}")
     public AdministrationProjectsPage deleteProject(Project project) {
         table.getDeleteCell(project.getName()).click();
         return new ConfirmationDeleteWindow(browsersService)
@@ -49,6 +51,7 @@ public class AdministrationProjectsPage extends HeaderDashboard {
                 .clickButtonOk();
     }
 
+    @Step("Open Conformation Delete Window before delete project")
     public ConfirmationDeleteWindow openConformationDeleteWindow(Project project) {
         table.getDeleteCell(project.getName()).click();
         return new ConfirmationDeleteWindow(browsersService);

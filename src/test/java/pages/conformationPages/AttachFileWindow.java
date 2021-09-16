@@ -75,7 +75,7 @@ public class AttachFileWindow extends BasePage {
         getDeleteButton().click();
     }
 
-    @Step("Click Attach Button and return to the Add Test Case Page")
+    @Step("Click Attach Button, close Upload File Window and return to the Add Test Case Page")
     public AddEditTestCasePage clickAttachButton() throws InterruptedException {
         //     getAttachButton().click();
         ((JavascriptExecutor) browsersService.getDriver()).executeScript("arguments[0].click();", getAttachButton());
@@ -89,7 +89,7 @@ public class AttachFileWindow extends BasePage {
      *                            DELETE
      */
 
-    @Step("Click on the button Add New, upload file {fileName}")
+    @Step("Click on the Add New file button, upload file {fileName}")
     public AttachFileWindow downloadFile(String fileName) throws AWTException, InterruptedException {
         Thread.sleep(1000);
                clickAddNewButton();

@@ -3,6 +3,7 @@ package pages;
 import baseEntities.BasePage;
 import core.BrowsersService;
 import core.ReadProperties;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -47,6 +48,7 @@ public class SomeTestCasePage extends BasePage {
         return new Button(browsersService, EDIT_TEST_CASES_BUTTON);
     }
 
+    @Step("Click on the Edit Test Case button and go to the Add Test Case Page")
     public AddEditTestCasePage clickEditTestCaseButton() {
         getEditTestCaseButton().click();
         return new AddEditTestCasePage(browsersService, false);

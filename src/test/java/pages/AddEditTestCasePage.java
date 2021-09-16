@@ -12,7 +12,7 @@ import wrappers.InputField;
 
 public class AddEditTestCasePage extends BasePage {
 
-    private final static String ENDPOINT = "index.php?/cases/add/2";//???
+    private final static String ENDPOINT = "index.php?/cases/add/%d";
 
     private final static By TEST_CASE_TITLE_LABEL = By.xpath("//label[@for = 'title']");
     private final static By TEST_CASE_TITLE_INPUT = By.id("title");
@@ -90,6 +90,7 @@ public class AddEditTestCasePage extends BasePage {
         return this;
     }
 
+    @Step("Click Add Test Case button and go to the Some Test Case Page")
     public SomeTestCasePage clickAddTestCaseButton() {
         getAddTestCaseButton()
                 .click();
@@ -101,7 +102,7 @@ public class AddEditTestCasePage extends BasePage {
                 .click();
     }
 
-
+    @Step("Input value in Test Case name, click Add Test Case button and go to Test Case Page")
     public SomeTestCasePage successfullyAddTestCase(String testCaseTitle) {
         inputTestCaseTitle(testCaseTitle);
         clickAddTestCaseButton();
@@ -119,13 +120,14 @@ public class AddEditTestCasePage extends BasePage {
         return this;
     }
 
+    @Step("Enter a value in the Name Test Case input and click Add Test Case button")
     public AddEditTestCasePage unsuccessfullyAddTestCase(String testCaseTitle) {
         inputTestCaseTitle(testCaseTitle);
         clickAddTestCaseButtonWithoutReturn();
         return this;
     }
 
-    @Step("Click on the download button for the Test Case and open the file download window")
+    @Step("Click on the Entity Attachment List Button for the uploading file in Test Case and open the File Uploading Window")
     public AttachFileWindow clickEntityAttachmentFieldButton() {
         try {
             ((JavascriptExecutor) browsersService.getDriver()).executeScript("arguments[0].click();", getEntityAttachmentEmptyField());
