@@ -79,7 +79,7 @@ public class LoginPage extends BasePage {
         return getIncorrectLoginMessage().getText();
     }
 
-    @Step("Login with correct attributes")
+    @Step("Login with correct attributes and click Log in button")
     public DashboardPage successfulLogin() {
         inputEmail(ReadProperties.getInstance().getUsername())
                 .inputPasswordField(ReadProperties.getInstance().getPassword())
@@ -87,7 +87,7 @@ public class LoginPage extends BasePage {
         return new DashboardPage(browsersService, true);
     }
 
-    @Step("Login with incorrect password")
+    @Step("Login with incorrect password Log in button")
     public LoginPage unsuccessfulLogin() {
         inputEmail(ReadProperties.getInstance().getUsername())
                 .inputPasswordField(ReadProperties.getInstance().getUsername())
@@ -95,7 +95,7 @@ public class LoginPage extends BasePage {
         return this;
     }
 
-    @Step("Enter a value {email} in the email input")
+    @Step("Enter a value {email} in the email input Log in button")
     public LoginPage loginWithParameters(String email, String password) {
         inputEmail(email)
                 .inputPasswordField(password)

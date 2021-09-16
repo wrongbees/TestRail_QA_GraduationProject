@@ -1,6 +1,7 @@
 package adapters;
 
 import endpoints.CasesEndpoint;
+import io.qameta.allure.Step;
 import io.restassured.mapper.ObjectMapperType;
 import io.restassured.response.Response;
 import models.Cases;
@@ -10,6 +11,7 @@ import static io.restassured.RestAssured.given;
 
 public class CasesAdapter extends BaseAdapter {
 
+    @Step("Create a test case by POST API request")
     public Cases add(Cases cases, int sectionId) {
         Response response = given()
                 .body(cases, ObjectMapperType.GSON)
@@ -23,6 +25,7 @@ public class CasesAdapter extends BaseAdapter {
         return gson.fromJson(response.asString().trim(), Cases.class);
     }
 
+    @Step("GET test cases API request")
     public Cases get(Cases cases) {
         Response response = given()
                 .when()

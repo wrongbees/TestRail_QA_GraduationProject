@@ -2,6 +2,7 @@ package adapters;
 
 import com.google.common.reflect.TypeToken;
 import endpoints.ProjectEndpoints;
+import io.qameta.allure.Step;
 import io.restassured.mapper.ObjectMapperType;
 import io.restassured.response.Response;
 import models.Project;
@@ -40,6 +41,7 @@ public class ProjectsAdapter extends BaseAdapter {
         return gson.fromJson(response.asString().trim(), Project.class);
     }
 
+    @Step("Create a project by POST API request")
     public Project add(Project project) {
         Response response = given()
                 .body(project, ObjectMapperType.GSON)

@@ -4,6 +4,7 @@ import adapters.CasesAdapter;
 import adapters.ProjectsAdapter;
 import adapters.SectionAdapter;
 import baseEntities.BaseApiTest;
+import io.qameta.allure.Description;
 import models.Cases;
 import models.ModelsFactory;
 import models.Project;
@@ -14,6 +15,8 @@ import org.testng.annotations.Test;
 public class TestRailApiExecutionTest extends BaseApiTest {
     int numberOfCases = 3;
 
+    @Description("API test for creating a Test Case by POST request. " +
+            "This test include step creating project and section by POST request")
     @Test
     public void addCasesTest() {
         Project projectModels = ModelsFactory.getProject();
@@ -30,6 +33,7 @@ public class TestRailApiExecutionTest extends BaseApiTest {
         }
     }
 
+    @Description("API test for getting a Test Cases by GET request")
     @Test(dependsOnMethods = "addCasesTest")
     public void getCasesTest() {
         Cases actualCases = actualCasesList.get(0);

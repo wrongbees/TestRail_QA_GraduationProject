@@ -1,6 +1,7 @@
 package adapters;
 
 import endpoints.SectionEndpoints;
+import io.qameta.allure.Step;
 import io.restassured.mapper.ObjectMapperType;
 import io.restassured.response.Response;
 import models.Section;
@@ -11,6 +12,7 @@ import static io.restassured.RestAssured.given;
 
 public class SectionAdapter extends BaseAdapter {
 
+    @Step("Create a section by POST API request")
     public Section add(Section section, int projectID) {
         Response response = given()
                 .body(section, ObjectMapperType.GSON)
