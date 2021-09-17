@@ -3,6 +3,7 @@ package pages;
 import core.BrowsersService;
 import core.ReadProperties;
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import models.Project;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -10,7 +11,7 @@ import org.openqa.selenium.WebElement;
 import pages.baseHeaderPage.HeaderDashboard;
 import pages.conformationPages.ConfirmationDeleteWindow;
 import table.Table;
-
+@Log4j2
 public class AdministrationProjectsPage extends HeaderDashboard {
     private static Table table;
     private static final String endpoint = "/index.php?/admin/projects/overview";
@@ -45,6 +46,7 @@ public class AdministrationProjectsPage extends HeaderDashboard {
 
     @Step("Delete project {project}")
     public AdministrationProjectsPage deleteProject(Project project) {
+        log.info("Step: Delete project {project}");
         table.getDeleteCell(project.getName()).click();
         return new ConfirmationDeleteWindow(browsersService)
                 .checkBoxDelete()
@@ -53,6 +55,7 @@ public class AdministrationProjectsPage extends HeaderDashboard {
 
     @Step("Open Conformation Delete Window before delete project")
     public ConfirmationDeleteWindow openConformationDeleteWindow(Project project) {
+        log.info("Step: Open Conformation Delete Window before delete project");
         table.getDeleteCell(project.getName()).click();
         return new ConfirmationDeleteWindow(browsersService);
     }

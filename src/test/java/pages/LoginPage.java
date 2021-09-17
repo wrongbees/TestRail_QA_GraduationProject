@@ -4,12 +4,14 @@ import baseEntities.BasePage;
 import core.BrowsersService;
 import core.ReadProperties;
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import wrappers.Button;
 import wrappers.InputField;
 
+@Log4j2
 public class LoginPage extends BasePage {
 
     private final static String ENDPOINT = "/index.php?/auth/login";
@@ -81,6 +83,7 @@ public class LoginPage extends BasePage {
 
     @Step("Login with correct attributes and click Log in button")
     public DashboardPage successfulLogin() {
+        log.info("Step: Login with correct attributes and click Log in button");
         inputEmail(ReadProperties.getInstance().getUsername())
                 .inputPasswordField(ReadProperties.getInstance().getPassword())
                 .clickButton();
@@ -89,6 +92,7 @@ public class LoginPage extends BasePage {
 
     @Step("Login with incorrect password Log in button")
     public LoginPage unsuccessfulLogin() {
+        log.info("Step: Login with incorrect password Log in button");
         inputEmail(ReadProperties.getInstance().getUsername())
                 .inputPasswordField(ReadProperties.getInstance().getUsername())
                 .clickButton();
@@ -97,6 +101,7 @@ public class LoginPage extends BasePage {
 
     @Step("Enter a value {email} in the email input Log in button")
     public LoginPage loginWithParameters(String email, String password) {
+        log.info("Step: Enter a value {email} in the email input Log in button");
         inputEmail(email)
                 .inputPasswordField(password)
                 .clickButton();

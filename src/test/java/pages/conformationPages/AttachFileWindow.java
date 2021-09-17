@@ -4,6 +4,7 @@ import baseEntities.BasePage;
 import core.BrowsersService;
 import executors.RobotExecutor;
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
@@ -12,7 +13,7 @@ import pages.AddEditTestCasePage;
 import wrappers.Button;
 
 import java.awt.*;
-
+@Log4j2
 public class AttachFileWindow extends BasePage {
 
     private final static By WINDOW_TITLE = By.id("ui-dialog-title-attachmentNewDialogFile");
@@ -77,7 +78,7 @@ public class AttachFileWindow extends BasePage {
 
     @Step("Click Attach Button, close Upload File Window and return to the Add Test Case Page")
     public AddEditTestCasePage clickAttachButton() throws InterruptedException {
-        //     getAttachButton().click();
+      log.info("Step: Click Attach Button, close Upload File Window and return to the Add Test Case Page");
         ((JavascriptExecutor) browsersService.getDriver()).executeScript("arguments[0].click();", getAttachButton());
         Thread.sleep(2000);
         ((JavascriptExecutor) browsersService.getDriver()).executeScript("window.scrollTo(0, document.body.scrollHeight)");
@@ -91,10 +92,11 @@ public class AttachFileWindow extends BasePage {
 
     @Step("Click on the Add New file button, upload file {fileName}")
     public AttachFileWindow downloadFile(String fileName) throws AWTException, InterruptedException {
+        log.info("Step: Click on the Add New file button, upload file {fileName}");
         Thread.sleep(1000);
                clickAddNewButton();
         RobotExecutor.downloadFile(fileName);
-       // getDeleteButton();
+
         int timeOut = 0;
         boolean isEnable = false;
 

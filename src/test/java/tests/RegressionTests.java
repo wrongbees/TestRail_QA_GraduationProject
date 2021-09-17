@@ -3,6 +3,7 @@ package tests;
 import baseEntities.BaseUITest;
 import core.ReadProperties;
 import io.qameta.allure.Description;
+import lombok.extern.log4j.Log4j2;
 import models.ModelsFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -14,12 +15,13 @@ import pages.conformationPages.ConfirmationDeleteWindow;
 import utils.DataProvider;
 
 import java.awt.*;
-
+@Log4j2
 public class RegressionTests extends BaseUITest {
 
     @Description("Negative test for login with incorrect password")
     @Test
     public void negativeLoginTest() {
+        log.info("Test in progress: RegressionTests.negativeLoginTest()");
         LoginPage loginPage = new LoginPage(browsersService, true)
                 .unsuccessfulLogin();
 
@@ -29,6 +31,7 @@ public class RegressionTests extends BaseUITest {
     @Description("Negative SQL injection test in email input")
     @Test(dependsOnMethods = "negativeLoginTest")
     public void negativeSafetyTest() {
+        log.info("Test in progress: RegressionTests.negativeSafetyTest()");
         LoginPage loginPage = new LoginPage(browsersService, true)
                 .loginWithParameters("SELECT * FROM users WHERE id=1'", ReadProperties.getInstance().getPassword());
 
@@ -38,6 +41,7 @@ public class RegressionTests extends BaseUITest {
     @Description("Positive test for displaying a pop-up message")
     @Test(dependsOnMethods = "negativeSafetyTest")
     public void positivePopUpMessageTest() {
+        log.info("Test in progress: RegressionTests.positivePopUpMessageTest()");
         DashboardPage dashboardPage = new LoginPage(browsersService, true)
                 .successfulLogin()
                 .actionForPopUp();
@@ -48,6 +52,7 @@ public class RegressionTests extends BaseUITest {
     @Description("Positive test for uploading file in Test Case")
     @Test(dependsOnMethods = "positivePopUpMessageTest")
     public void positiveUploadingFileTest() throws AWTException, InterruptedException {
+        log.info("Test in progress: RegressionTests.positiveUploadingFileTest()");
         project = ModelsFactory.getProject();
         AddEditTestCasePage addTestCasePage = new LoginPage(browsersService, true)
                 .successfulLogin()
@@ -68,6 +73,7 @@ public class RegressionTests extends BaseUITest {
     @Description("Negative Boundary value test for trying to enter string without any symbols in Name Test Case input")
     @Test(dependsOnMethods = "negativeSafetyTest")
     public void negativeNullBoundaryValueTest() {
+        log.info("Test in progress: RegressionTests.negativeNullBoundaryValueTest()");
         project = ModelsFactory.getProject();
         AddEditTestCasePage addTestCasePage = new LoginPage(browsersService, true)
                 .successfulLogin()
@@ -88,6 +94,7 @@ public class RegressionTests extends BaseUITest {
             dataProvider = "BoundaryInputFiledValue",
             dataProviderClass = DataProvider.class, alwaysRun = true)
     public void positiveBoundaryValuesTest(int numberOfValuesInputFiled) {
+        log.info("Test in progress: RegressionTests.positiveBoundaryValuesTest()");
         String newGeneratedString = ModelsFactory.stringGenerator(numberOfValuesInputFiled);
         SomeTestCasePage someTestCasePage = new LoginPage(browsersService, true)
                 .successfulLogin()
@@ -103,6 +110,7 @@ public class RegressionTests extends BaseUITest {
             dataProvider = "NegativeBoundaryInputFiledValue",
             dataProviderClass = DataProvider.class)
     public void negativeBoundaryValuesTest(int numberOfValuesInputFiled) {
+        log.info("Test in progress: RegressionTests.negativeBoundaryValuesTest()");
         int maxValueSymbolsInString = 250;
         String newGeneratedString = ModelsFactory.stringGenerator(numberOfValuesInputFiled);
         SomeTestCasePage someTestCasePage = new LoginPage(browsersService, true)
@@ -120,6 +128,7 @@ public class RegressionTests extends BaseUITest {
     @Description("Test for opening dialog window before deleting a project")
     @Test(dependsOnMethods = "negativeBoundaryValuesTest")
     public void positiveDialogBoxDisplayTest() {
+        log.info("Test in progress: RegressionTests.positiveDialogBoxDisplayTest()");
         ConfirmationDeleteWindow deleteWindow = new LoginPage(browsersService, true)
                 .successfulLogin()
                 .clickAdministrationButton()

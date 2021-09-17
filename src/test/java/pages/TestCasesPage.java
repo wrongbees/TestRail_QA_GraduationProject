@@ -4,12 +4,13 @@ import baseEntities.BasePage;
 import core.BrowsersService;
 import core.ReadProperties;
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
-import wrappers.Button;
 
+@Log4j2
 public class TestCasesPage extends BasePage {
 
     private final static String ENDPOINT = "index.php?/suites/view/%d";
@@ -46,6 +47,7 @@ public class TestCasesPage extends BasePage {
 
     @Step("Click on the Add Test Case button and go to the Add Test Case Page")
     public AddEditTestCasePage clickAddTestCaseButton() {
+        log.info("Step: Click on the Add Test Case button and go to the Add Test Case Page");
         ((JavascriptExecutor) browsersService.getDriver()).executeScript("arguments[0].click();", getAddTestCaseButton());
         return new AddEditTestCasePage(browsersService, false);
     }

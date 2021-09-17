@@ -4,6 +4,7 @@ import baseEntities.BasePage;
 import core.BrowsersService;
 import core.ReadProperties;
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import models.Project;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -12,7 +13,7 @@ import wrappers.Button;
 import wrappers.CheckBox;
 import wrappers.InputField;
 import wrappers.RadioButton;
-
+@Log4j2
 public class AddProjectPage extends BasePage {
 
     private final static String ENDPOINT = "index.php?/admin/projects/add/%d";//???
@@ -98,6 +99,8 @@ public class AddProjectPage extends BasePage {
     @Step("Fill the project attributes with random values {project}, " +
             "click on the button Add Project and go to the Administration Projects Page")
     public AdministrationProjectsPage addProject(Project project) {
+        log.info("Step: Fill the project attributes with random values {project}, " +
+                "click on the button Add Project and go to the Administration Projects Page");
         inputNameProject(project.getName())
                 .inputAnnouncementProjectInput(project.getAnnouncement())
                 .setShowAnnouncementProjectCheckBox(project.isShow_announcement())

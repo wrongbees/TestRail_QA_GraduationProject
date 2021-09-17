@@ -3,6 +3,7 @@ package pages;
 import core.BrowsersService;
 import core.ReadProperties;
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import models.Project;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -13,7 +14,7 @@ import wrappers.Button;
 import wrappers.UIElement;
 
 import java.util.List;
-
+@Log4j2
 public class DashboardPage extends HeaderDashboard {
     Actions actions;
 
@@ -71,6 +72,7 @@ public class DashboardPage extends HeaderDashboard {
 
     @Step("Click on the button Add Project and go to the page Add Project Page")
     public AddProjectPage clickAddProjectButton() {
+        log.info("Click on the button Add Project and go to the page Add Project Page");
         getAddProjectButton()
                 .click();
         return new AddProjectPage(browsersService, false);
@@ -87,6 +89,7 @@ public class DashboardPage extends HeaderDashboard {
      */
     @Step("Click on the button with name project {project} and go to the its page")
     public SomeProjectPage clickProjectLink(Project project) {
+        log.info("Step: Click on the button with name project {project} and go to the its page");
 
         for (WebElement element : getProjectList()) {
             if (element.getText().equalsIgnoreCase(project.getName())) {
@@ -118,6 +121,7 @@ public class DashboardPage extends HeaderDashboard {
 
     @Step("Hover over the Compact View button")
     public DashboardPage actionForPopUp() {
+        log.info("Step: Hover over the Compact View button");
         actions = new Actions(browsersService.getDriver());
         actions
                 .moveToElement(getIconForPopUp())

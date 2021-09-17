@@ -5,6 +5,7 @@ import adapters.ProjectsAdapter;
 import adapters.SectionAdapter;
 import baseEntities.BaseApiTest;
 import io.qameta.allure.Description;
+import lombok.extern.log4j.Log4j2;
 import models.Cases;
 import models.ModelsFactory;
 import models.Project;
@@ -12,6 +13,7 @@ import models.Section;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+@Log4j2
 public class TestRailApiExecutionTest extends BaseApiTest {
     int numberOfCases = 3;
 
@@ -19,6 +21,7 @@ public class TestRailApiExecutionTest extends BaseApiTest {
             "This test include step creating project and section by POST request")
     @Test
     public void addCasesTest() {
+        log.info("Test in progress: TestRailApiExecutionTest.addCasesTest()");
         Project projectModels = ModelsFactory.getProject();
 
         project = new ProjectsAdapter().add(projectModels);
@@ -36,6 +39,7 @@ public class TestRailApiExecutionTest extends BaseApiTest {
     @Description("API test for getting a Test Cases by GET request")
     @Test(dependsOnMethods = "addCasesTest")
     public void getCasesTest() {
+        log.info("Test in progress: TestRailApiExecutionTest.getCasesTest()");
         Cases actualCases = actualCasesList.get(0);
         Cases cases = new CasesAdapter().get(actualCases);
 
@@ -44,6 +48,7 @@ public class TestRailApiExecutionTest extends BaseApiTest {
 
     @Test(dependsOnMethods = "getCasesTest")
     public void negativeGetCasesTest() {
+        log.info("Test in progress: TestRailApiExecutionTest.negativeGetCasesTest()");
         Cases actualCases = ModelsFactory.getCases();
         new CasesAdapter().getFailed(actualCases);
 
@@ -51,18 +56,21 @@ public class TestRailApiExecutionTest extends BaseApiTest {
 
     @Test(dependsOnMethods = "negativeGetCasesTest")
     public void getHistoryForCases() {
+        log.info("Test in progress: TestRailApiExecutionTest.getHistoryForCases()");
         Cases actualCases = actualCasesList.get(0);
         new CasesAdapter().getHistory(actualCases);
     }
 
     @Test(dependsOnMethods = "getHistoryForCases")
     public void negativeGetHistoryForCasesTest() {
+        log.info("Test in progress: TestRailApiExecutionTest.negativeGetHistoryForCasesTest()");
         Cases actualCases = ModelsFactory.getCases();
         new CasesAdapter().getHistoryFailed(actualCases);
     }
 
     @Test(dependsOnMethods = "negativeGetHistoryForCasesTest")
     public void updateCaseTest() {
+        log.info("Test in progress: TestRailApiExecutionTest.updateCaseTest()");
         Cases expected_cases = Cases.builder()
                 .title("TITLE №00")
                 .refs("Какое то обновленное поле...")

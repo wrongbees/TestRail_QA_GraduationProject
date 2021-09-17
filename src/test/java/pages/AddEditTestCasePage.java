@@ -4,12 +4,14 @@ import baseEntities.BasePage;
 import core.BrowsersService;
 import core.ReadProperties;
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import models.Cases;
 import org.openqa.selenium.*;
 import pages.conformationPages.AttachFileWindow;
 import wrappers.Button;
 import wrappers.InputField;
 
+@Log4j2
 public class AddEditTestCasePage extends BasePage {
 
     private final static String ENDPOINT = "index.php?/cases/add/%d";
@@ -92,6 +94,7 @@ public class AddEditTestCasePage extends BasePage {
 
     @Step("Click Add Test Case button and go to the Some Test Case Page")
     public SomeTestCasePage clickAddTestCaseButton() {
+        log.info("Step: Click Add Test Case button and go to the Some Test Case Page");
         getAddTestCaseButton()
                 .click();
         return new SomeTestCasePage(browsersService, false);
@@ -104,13 +107,15 @@ public class AddEditTestCasePage extends BasePage {
 
     @Step("Input value in Test Case name, click Add Test Case button and go to Test Case Page")
     public SomeTestCasePage successfullyAddTestCase(String testCaseTitle) {
-        inputTestCaseTitle(testCaseTitle);
-        clickAddTestCaseButton();
+        log.info("Step: Input value in Test Case name, click Add Test Case button and go to Test Case Page");
+        inputTestCaseTitle(testCaseTitle)
+                .clickAddTestCaseButton();
         return new SomeTestCasePage(browsersService, false);
     }
 
     @Step("Fill test case attributes with random values")
     public AddEditTestCasePage addTestCase(Cases someCase) {
+        log.info("Step: Fill test case attributes with random values");
         if (someCase.getTitle() != null) {
             inputTestCaseTitle(someCase.getTitle());
         }
@@ -122,13 +127,15 @@ public class AddEditTestCasePage extends BasePage {
 
     @Step("Enter a value in the Name Test Case input and click Add Test Case button")
     public AddEditTestCasePage unsuccessfullyAddTestCase(String testCaseTitle) {
-        inputTestCaseTitle(testCaseTitle);
-        clickAddTestCaseButtonWithoutReturn();
+        log.info("Step: Enter a value in the Name Test Case input and click Add Test Case button");
+        inputTestCaseTitle(testCaseTitle)
+                .clickAddTestCaseButtonWithoutReturn();
         return this;
     }
 
     @Step("Click on the Entity Attachment List Button for the uploading file in Test Case and open the File Uploading Window")
     public AttachFileWindow clickEntityAttachmentFieldButton() {
+        log.info("Step: Click on the Entity Attachment List Button for the uploading file in Test Case and open the File Uploading Window");
         try {
             ((JavascriptExecutor) browsersService.getDriver()).executeScript("arguments[0].click();", getEntityAttachmentEmptyField());
         } catch (ElementNotInteractableException ex) {
