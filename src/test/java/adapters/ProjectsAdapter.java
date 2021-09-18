@@ -20,6 +20,7 @@ public class ProjectsAdapter extends BaseAdapter {
                 .when()
                 .get(ProjectEndpoints.GET_ALL_PROJECTS)
                 .then()
+                .log().body()
                 .statusCode(HttpStatus.SC_OK)
                 .extract().response();
 
