@@ -27,13 +27,17 @@ public final class ReadProperties {
         return properties.getProperty("url");
     }
 
-    public String getUsername() { return properties.getProperty("username");}
+    public String getUsername() {
+        return properties.getProperty("username");
+    }
 
     public String getPassword() {
         return properties.getProperty("password");
     }
 
-    public String getBrowserName() { return properties.getProperty("browser"); }
+    public String getBrowserName() {
+        return properties.getProperty("browser");
+    }
 
     public boolean isHeadless() {
         return properties.getProperty("headless").equalsIgnoreCase("true");

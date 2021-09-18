@@ -21,4 +21,8 @@ public class Button {
     public boolean isDisplayed() {
         return this.uiElement.isDisplayed();
     }
+
+    public boolean isEnabled() {
+        return this.uiElement.isEnabled();
+    }
 }

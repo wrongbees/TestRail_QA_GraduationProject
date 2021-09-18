@@ -1,20 +1,16 @@
 package baseEntities;
 
-import core.BrowsersService;
+import models.Cases;
+import models.Project;
+import models.Section;
 
-import org.testng.annotations.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class BaseTest {
-    public BrowsersService browsersService;
+    public static Project project;
+    public static Cases cases;
+    public static Section currentSection;
+    public static List<Cases> actualCasesList = new ArrayList<>();
 
-    @BeforeMethod
-    public void startBrowser() {
-        browsersService = new BrowsersService();
-    }
-
-    @AfterMethod
-    public void closeBrowser() {
-        browsersService.getDriver().quit();
-        browsersService = null;
-    }
 }

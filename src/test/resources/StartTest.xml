@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Main Suite" parallel="tests" thread-count="1">
+    <test name="Api Tests">
+        <classes>
+            <class name="tests.TestRailApiExecutionTest"/>
+        </classes>
+    </test>
+    <test name="Smoke Tests">
+        <classes>
+            <class name="tests.SmokeTests"/>
+        </classes>
+    </test>
+    <test name="Regression Tests">
+        <classes>
+            <class name="tests.RegressionTests"/>
+        </classes>
+    </test>
+</suite>
+
+
