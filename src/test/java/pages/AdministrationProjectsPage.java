@@ -10,7 +10,8 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import pages.baseHeaderPage.HeaderDashboard;
 import pages.conformationPages.ConfirmationDeleteWindow;
-import table.Table;
+import wrappers.table.Table;
+
 @Log4j2
 public class AdministrationProjectsPage extends HeaderDashboard {
     private static Table table;

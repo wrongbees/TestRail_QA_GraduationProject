@@ -20,9 +20,6 @@ public class SmokeTests extends BaseUITest {
     @Test
     public void positiveEditTestCaseTest() throws AWTException, InterruptedException {
         log.info("Test in progress: SmokeTests.positiveEditTestCaseTest()");
-        project = Project.builder()
-                .name("Nannie Pollich_Project.")
-                .build();
 
         cases = ModelsFactory.getCases();
 

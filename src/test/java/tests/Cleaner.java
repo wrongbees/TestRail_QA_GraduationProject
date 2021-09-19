@@ -1,11 +1,10 @@
 package tests;
 
-import adapters.ProjectsAdapter;
+import ApiRequestAdapters.adapters.ProjectsAdapter;
 import baseEntities.BaseApiTest;
 import models.AllProjects;
 import models.Project;
 import org.testng.annotations.Test;
-import java.util.List;
 
 /***
  * Doesn't participate in testing.
