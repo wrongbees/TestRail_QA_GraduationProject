@@ -1,20 +1,18 @@
 package adapters;
 
-import com.google.common.reflect.TypeToken;
 import endpoints.ProjectEndpoints;
 import io.qameta.allure.Step;
 import io.restassured.mapper.ObjectMapperType;
 import io.restassured.response.Response;
 import models.Project;
+import models.AllProjects;
 import org.apache.http.HttpStatus;
-
-import java.util.List;
 
 import static io.restassured.RestAssured.given;
 
 public class ProjectsAdapter extends BaseAdapter {
 
-    public List<Project> get() {
+    public AllProjects get() {
 
         Response response = given()
                 .when()
@@ -23,9 +21,12 @@ public class ProjectsAdapter extends BaseAdapter {
                 .log().body()
                 .statusCode(HttpStatus.SC_OK)
                 .extract().response();
+        System.out.println(response.jsonPath().get("projects").toString());
 
-        return (List<Project>) gson.fromJson(response.asString().trim(), new TypeToken<List<Project>>() {
-        }.getType());
+//        return (List<Project>) gson.fromJson(response.jsonPath().get("projects").asString().trim(), new TypeToken<List<Project>>() {
+//        }.getType());
+        return gson.fromJson(response.asString().trim(), AllProjects.class);
+
 
     }
 

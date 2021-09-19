@@ -97,10 +97,10 @@ public class AddProjectPage extends BasePage {
     }
 
     @Step("Fill the project attributes with random values {project}, " +
-            "click on the button Add Project and go to the Administration Projects Page")
+            "click on the button Add Project and go to the Administration AllProjects Page")
     public AdministrationProjectsPage addProject(Project project) {
         log.info("Step: Fill the project attributes with random values {project}, " +
-                "click on the button Add Project and go to the Administration Projects Page");
+                "click on the button Add Project and go to the Administration AllProjects Page");
         inputNameProject(project.getName())
                 .inputAnnouncementProjectInput(project.getAnnouncement())
                 .setShowAnnouncementProjectCheckBox(project.isShow_announcement())

@@ -40,9 +40,9 @@ public class AdministrationSidebar extends BasePage {
         return new Button(browsersService, PROJECTS_BUTTON);
     }
 
-    @Step("Click on the Projects button and go to the Administration Projects Button")
+    @Step("Click on the AllProjects button and go to the Administration AllProjects Button")
     public AdministrationProjectsPage clickProjectsButton() {
-        log.info("Step: Click on the Projects button and go to the Administration Projects Button");
+        log.info("Step: Click on the AllProjects button and go to the Administration AllProjects Button");
         getProjectsButton().click();
         return new AdministrationProjectsPage(browsersService, false);
     }
