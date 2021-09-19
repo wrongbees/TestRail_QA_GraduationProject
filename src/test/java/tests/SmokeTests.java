@@ -4,6 +4,7 @@ import baseEntities.BaseUITest;
 import io.qameta.allure.Description;
 import lombok.extern.log4j.Log4j2;
 import models.ModelsFactory;
+import models.Project;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.AddEditTestCasePage;
@@ -19,6 +20,10 @@ public class SmokeTests extends BaseUITest {
     @Test
     public void positiveEditTestCaseTest() throws AWTException, InterruptedException {
         log.info("Test in progress: SmokeTests.positiveEditTestCaseTest()");
+        project = Project.builder()
+                .name("Nannie Pollich_Project.")
+                .build();
+
         cases = ModelsFactory.getCases();
 
         AddEditTestCasePage addEditTestCasePage = new LoginPage(browsersService, true)
