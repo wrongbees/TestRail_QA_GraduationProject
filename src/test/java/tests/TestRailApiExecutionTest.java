@@ -84,7 +84,6 @@ public class TestRailApiExecutionTest extends BaseApiTest {
 
         Cases actual_case = new CasesAdapter().updateCase(actualCasesList.get(0).getId(), expected_cases);
         Assert.assertEquals(expected_cases.getTitle(), actual_case.getTitle());
-        log.info("Project name:" + project.getName());
     }
 }
 

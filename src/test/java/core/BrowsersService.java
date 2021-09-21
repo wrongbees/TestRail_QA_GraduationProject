@@ -2,6 +2,7 @@ package core;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.github.bonigarcia.wdm.config.DriverManagerType;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -12,6 +13,7 @@ import utils.Waits;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+@Log4j2
 public class BrowsersService {
     private WebDriver driver = null;
     private Waits waiters;
@@ -29,19 +31,19 @@ public class BrowsersService {
 
                 driver = new ChromeDriver(chromeOptions);
                 break;
-            case "firefox":
 
+            case "firefox":
                 WebDriverManager.getInstance(DriverManagerType.FIREFOX).setup();
                 driver = new FirefoxDriver();
                 break;
 
             case "remote_chrome":
                 chromeOptions = new ChromeOptions();
-                driver = new RemoteWebDriver(new URL("http://192.168.56.1:4444/wd/hub"), chromeOptions);
+                driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), chromeOptions);
                 break;
 
             default:
-                System.out.println("Browser " + ReadProperties.getInstance().getBrowserName() + " is not supported.");
+                log.info("Browser " + ReadProperties.getInstance().getBrowserName() + " is not supported.");
         }
 
         waiters = new Waits(driver);

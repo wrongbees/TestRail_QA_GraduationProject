@@ -22,7 +22,6 @@ public class ConfirmationDeleteWindow extends BasePage {
 
     @Override
     protected void openPage() {
-
     }
 
     @Override

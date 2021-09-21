@@ -13,6 +13,7 @@ import pages.AddEditTestCasePage;
 import wrappers.Button;
 
 import java.awt.*;
+
 @Log4j2
 public class AttachFileWindow extends BasePage {
 
@@ -47,7 +48,7 @@ public class AttachFileWindow extends BasePage {
     }
 
     private Button getAddNewButton() {
-        return new Button(browsersService,ADD_NEW_BUTTON);
+        return new Button(browsersService, ADD_NEW_BUTTON);
     }
 
     private WebElement getAttachButton() {
@@ -78,7 +79,7 @@ public class AttachFileWindow extends BasePage {
 
     @Step("Click Attach Button, close Upload File Window and return to the Add Test Case Page")
     public AddEditTestCasePage clickAttachButton() throws InterruptedException {
-      log.info("Step: Click Attach Button, close Upload File Window and return to the Add Test Case Page");
+        log.info("Step: Click Attach Button, close Upload File Window and return to the Add Test Case Page");
         ((JavascriptExecutor) browsersService.getDriver()).executeScript("arguments[0].click();", getAttachButton());
         Thread.sleep(2000);
         ((JavascriptExecutor) browsersService.getDriver()).executeScript("window.scrollTo(0, document.body.scrollHeight)");
@@ -94,7 +95,7 @@ public class AttachFileWindow extends BasePage {
     public AttachFileWindow downloadFile(String fileName) throws AWTException, InterruptedException {
         log.info("Step: Click on the Add New file button, upload file {fileName}");
         Thread.sleep(1000);
-               clickAddNewButton();
+        clickAddNewButton();
         RobotExecutor.downloadFile(fileName);
 
         int timeOut = 0;
@@ -113,5 +114,4 @@ public class AttachFileWindow extends BasePage {
         }
         return this;
     }
-
 }
