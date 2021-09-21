@@ -133,13 +133,17 @@ public class AddEditTestCasePage extends BasePage {
         return this;
     }
 
-    @Step("Click on the Entity Attachment List Button for the uploading file in Test Case and open the File Uploading Window")
+    @Step("Click on the Entity Attachment List Button for the uploading file in " +
+            "Test Case and open the File Uploading Window")
     public AttachFileWindow clickEntityAttachmentFieldButton() {
-        log.info("Step: Click on the Entity Attachment List Button for the uploading file in Test Case and open the File Uploading Window");
+        log.info("Step: Click on the Entity Attachment List Button for the uploading file in " +
+                "Test Case and open the File Uploading Window");
         try {
-            ((JavascriptExecutor) browsersService.getDriver()).executeScript("arguments[0].click();", getEntityAttachmentEmptyField());
+            ((JavascriptExecutor) browsersService.getDriver()).executeScript("arguments[0].click();",
+                    getEntityAttachmentEmptyField());
         } catch (ElementNotInteractableException ex) {
-            ((JavascriptExecutor) browsersService.getDriver()).executeScript("arguments[0].click();", getEntityAttachmentAddField());
+            ((JavascriptExecutor) browsersService.getDriver()).executeScript("arguments[0].click();",
+                    getEntityAttachmentAddField());
         }
         return new AttachFileWindow(browsersService);
     }
