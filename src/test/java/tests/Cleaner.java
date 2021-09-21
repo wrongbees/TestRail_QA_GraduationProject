@@ -1,6 +1,6 @@
 package tests;
 
-import ApiRequestAdapters.adapters.ProjectsAdapter;
+import ApiRequestAdapters.ProjectsAdapter;
 import baseEntities.BaseApiTest;
 import models.AllProjects;
 import models.Project;

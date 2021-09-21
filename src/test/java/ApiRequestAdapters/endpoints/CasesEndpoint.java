@@ -1,4 +1,4 @@
-package ApiRequestAdapters.adapters.endpoints;
+package ApiRequestAdapters.endpoints;
 
 public interface CasesEndpoint {
     String ADD_CASE = "index.php?/api/v2/add_case/%d";
